@@ -18,4 +18,8 @@ export class Classroom {
   @OneToOne(() => Teacher)
   @JoinColumn({ name: "teacher_id" })
   teacherId: Teacher;
+
+  constructor(name: string) {
+    this.name = name;
+  }
 }

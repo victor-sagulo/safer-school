@@ -10,4 +10,9 @@ export class Teacher {
 
   @Column({ nullable: false, length: 128 })
   email: string;
+
+  constructor(name: string, email: string) {
+    this.name = name;
+    this.email = email;
+  }
 }
