@@ -28,7 +28,7 @@ export class Student {
   @Column({ name: "left_at" })
   leftAt: Date;
 
-  @ManyToMany(() => Relative, (relative) => relative.students)
+  @ManyToMany(() => Relative, { eager: true })
   @JoinTable()
   relatives: Relative[];
 

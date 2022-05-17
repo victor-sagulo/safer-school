@@ -1,11 +1,4 @@
-import {
-  Column,
-  Entity,
-  JoinTable,
-  ManyToMany,
-  PrimaryGeneratedColumn,
-} from "typeorm";
-import { Student } from "../Student";
+import { Column, Entity, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class Relative {
@@ -20,8 +13,4 @@ export class Relative {
 
   @Column({ nullable: false, length: 13 })
   phone: string;
-
-  @ManyToMany(() => Student, (student) => student.relatives, { eager: true })
-  @JoinTable()
-  students: Student[];
 }
