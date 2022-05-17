@@ -18,5 +18,7 @@ export const createTeacherService = async ({
 
   const teacher = new Teacher(name, email);
 
+  await teacherRepository.save(teacher);
+
   return teacher;
 };
