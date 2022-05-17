@@ -36,4 +36,10 @@ export class Student {
     name: "created_at",
   })
   createdAt: Date;
+
+  constructor(name: string, birthDate: string, address: string) {
+    this.name = name;
+    this.birthDate = new Date(birthDate);
+    this.address = address;
+  }
 }
