@@ -6,7 +6,7 @@ export class TeacherController {
     try {
       const { name, email } = req.body;
 
-      const createTeacher = createTeacherService({ name, email });
+      const createTeacher = await createTeacherService({ name, email });
 
       return res.status(201).json(createTeacher);
     } catch (err) {
@@ -20,7 +20,7 @@ export class TeacherController {
   }
 
   static async index(req: Request, res: Response) {
-    const teachers = readTeacherService();
+    const teachers = await readTeacherService();
 
     return res.status(200).json(teachers);
   }
