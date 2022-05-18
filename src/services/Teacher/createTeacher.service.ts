@@ -1,4 +1,5 @@
 import { AppDataSource } from "../../data-source";
+import { AppError } from "../../errors";
 import { Teacher } from "../../entities/Teacher";
 import { TeacherCreation } from "../../interfaces/Teacher/teacher.interface";
 
@@ -13,7 +14,7 @@ export const createTeacherService = async ({
   });
 
   if (findTeacher) {
-    throw new Error("This teacher already exists in our database");
+    throw new AppError(409, "This teacher already exists in our database");
   }
 
   const teacher = new Teacher(name, email);

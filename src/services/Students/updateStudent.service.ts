@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Student } from "../../entities/Student";
+import { AppError } from "../../errors";
 
 interface UpdateStudent {
   id: string;
@@ -17,7 +18,7 @@ export const updateStudentService = async ({
   const student = await studentsRepository.findOneBy({ id: id });
 
   if (!student) {
-    throw new Error("student not found");
+    throw new AppError(404, "Student not found or doesn't exists");
   }
 
   const updatedStudent = {
