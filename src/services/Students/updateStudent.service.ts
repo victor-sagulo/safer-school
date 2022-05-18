@@ -7,7 +7,11 @@ interface UpdateStudent {
   address: string;
 }
 
-const updateStudentService = async ({ id, name, address }: UpdateStudent) => {
+export const updateStudentService = async ({
+  id,
+  name,
+  address,
+}: UpdateStudent) => {
   const studentsRepository = AppDataSource.getRepository(Student);
 
   const student = await studentsRepository.findOneBy({ id: id });
@@ -27,4 +31,3 @@ const updateStudentService = async ({ id, name, address }: UpdateStudent) => {
 
   return updatedStudent;
 };
-export default updateStudentService;
