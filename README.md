@@ -1,5 +1,6 @@
 # safer-school
 
+
 Este é o backend da aplicação safer-school - Uma forma de controlar as entradas e saídas dos alunos de uma determinada instituição de ensino, onde cada aluno possui um responsável que pode retirá-lo da escola ao final das aulas.
 
 ##Rotas de listagem (Get)
@@ -469,3 +470,4 @@ Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
 	"message": "Classroom successfully deleted"
 }
 ```
+

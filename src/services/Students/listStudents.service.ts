@@ -4,7 +4,7 @@ import { Student } from "../../entities/Student";
 export const listStudentsService = async () => {
   const studentsRepository = AppDataSource.getRepository(Student);
 
-  const students = studentsRepository.find();
+  const students = await studentsRepository.find();
 
   return students;
 };
