@@ -1,5 +1,6 @@
 import { AppDataSource } from "../../data-source";
 import { Teacher } from "../../entities/Teacher";
+import { AppError } from "../../errors";
 
 export const updateTeacherService = async ({
   id,
@@ -11,7 +12,7 @@ export const updateTeacherService = async ({
   const teacher = await teacherRepository.findOneBy({ id });
 
   if (!teacher) {
-    throw new Error("Teacher don't exists in our database");
+    throw new AppError(404, "Teacher not found or doesn't exists");
   }
 
   const updatedTeacher = {
