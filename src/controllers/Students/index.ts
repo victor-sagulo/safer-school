@@ -1,5 +1,10 @@
 import { Request, Response } from "express";
-import { createStudentService, listStudentsService } from "../../services";
+import { AppError, handleAppError } from "../../errors";
+import {
+  createStudentService,
+  listOneStudentService,
+  listStudentsService,
+} from "../../services";
 
 export class StudentController {
   static async store(req: Request, res: Response) {
@@ -10,11 +15,8 @@ export class StudentController {
 
       return res.status(201).json(student);
     } catch (err) {
-      if (err instanceof Error) {
-        return res.status(400).json({
-          status: "error",
-          message: err.message,
-        });
+      if (err instanceof AppError) {
+        handleAppError(err, res);
       }
     }
   }
@@ -22,5 +24,17 @@ export class StudentController {
     const students = await listStudentsService();
 
     return res.status(200).json(students);
+  }
+  static async show(req: Request, res: Response) {
+    const { id } = req.params;
+    try {
+      const student = await listOneStudentService(id);
+
+      return res.status(200).json(student);
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleAppError(err, res);
+      }
+    }
   }
 }
