@@ -8,7 +8,7 @@ export class Relative {
   @Column({ nullable: false, length: 128 })
   name: string;
 
-  @Column({ nullable: false, length: 128 })
+  @Column({ nullable: false, length: 128, unique: true })
   email: string;
 
   @Column({ nullable: false, length: 13 })

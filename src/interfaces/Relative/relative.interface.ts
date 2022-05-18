@@ -1,13 +1,3 @@
-export interface IRelative {
-  id: string;
-  name: string;
-  email: string;
-  phone: string;
-  students_id: string;
-}
+import { Relative } from "../../entities/Relative";
 
-export interface IRelativeCreation {
-  name: string;
-  email: string;
-  phone: string;
-}
+export type RelativeCreation = Omit<Relative, "id">;

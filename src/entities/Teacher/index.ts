@@ -8,7 +8,7 @@ export class Teacher {
   @Column({ nullable: false, length: 128 })
   name: string;
 
-  @Column({ nullable: false, length: 128 })
+  @Column({ nullable: false, length: 128, unique: true })
   email: string;
 
   constructor(name: string, email: string) {

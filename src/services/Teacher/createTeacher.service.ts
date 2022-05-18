@@ -1,11 +1,11 @@
 import { AppDataSource } from "../../data-source";
 import { Teacher } from "../../entities/Teacher";
-import { ITeacherCreation } from "../../interfaces/Teacher/teacher.interface";
+import { TeacherCreation } from "../../interfaces/Teacher/teacher.interface";
 
 export const createTeacherService = async ({
   name,
   email,
-}: ITeacherCreation) => {
+}: TeacherCreation) => {
   const teacherRepository = AppDataSource.getRepository(Teacher);
 
   const findTeacher = await teacherRepository.findOneBy({
