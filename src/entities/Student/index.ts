@@ -2,7 +2,7 @@ import {
   Column,
   CreateDateColumn,
   Entity,
-  JoinTable,
+  JoinColumn,
   OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
@@ -23,13 +23,13 @@ export class Student {
   address: string;
 
   @OneToOne(() => Classroom, { eager: true })
-  @JoinTable({ name: "classroom_id" })
+  @JoinColumn({ name: "classroom_id" })
   classroomId: string;
 
-  @Column({ name: "entered_at" })
+  @Column({ name: "entered_at", nullable: true })
   enteredAt: Date;
 
-  @Column({ name: "left_at" })
+  @Column({ name: "left_at", nullable: true })
   leftAt: Date;
 
   @CreateDateColumn({
