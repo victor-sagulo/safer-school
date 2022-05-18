@@ -1,10 +1,3 @@
-export interface ITeacher {
-  id: string;
-  name: string;
-  email: string;
-}
+import { Teacher } from "../../entities/Teacher";
 
-export interface ITeacherCreation {
-  name: string;
-  email: string;
-}
+export type TeacherCreation = Omit<Teacher, "id">;

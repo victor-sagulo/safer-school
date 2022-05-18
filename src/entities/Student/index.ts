@@ -3,10 +3,10 @@ import {
   CreateDateColumn,
   Entity,
   JoinTable,
-  ManyToMany,
+  OneToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
-import { Relative } from "../Relative";
+import { Classroom } from "../Classroom";
 
 @Entity()
 export class Student {
@@ -16,21 +16,21 @@ export class Student {
   @Column({ nullable: false, length: 128 })
   name: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: false, name: "birth_date" })
   birthDate: Date;
 
   @Column({ nullable: false })
   address: string;
+
+  @OneToOne(() => Classroom, { eager: true })
+  @JoinTable({ name: "classroom_id" })
+  classroomId: string;
 
   @Column({ name: "entered_at" })
   enteredAt: Date;
 
   @Column({ name: "left_at" })
   leftAt: Date;
-
-  @ManyToMany(() => Relative, { eager: true })
-  @JoinTable()
-  relatives: Relative[];
 
   @CreateDateColumn({
     name: "created_at",
