@@ -1,2 +1,2 @@
 export * from "./createTeacher.service";
-export * from "./readTeachers.service";
+export * from "./listTeachers.service";
