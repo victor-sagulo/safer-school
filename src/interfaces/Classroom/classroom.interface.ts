@@ -1,9 +1,3 @@
-export interface IClassRoom {
-  id: string;
-  classroom: string;
-  teacher_id: string;
-}
+import { Classroom } from "../../entities/Classroom";
 
-export interface IClassRoomCreation {
-  classroom: string;
-}
+export type ClassroomCreation = Omit<Classroom, "id">;
