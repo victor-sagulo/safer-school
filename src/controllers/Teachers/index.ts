@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError, handleAppError } from "../../errors";
 import { createTeacherService, listTeacherService } from "../../services";
 
 export class TeacherController {
@@ -10,11 +11,8 @@ export class TeacherController {
 
       return res.status(201).json(createTeacher);
     } catch (err) {
-      if (err instanceof Error) {
-        return res.status(400).json({
-          status: "error",
-          message: err.message,
-        });
+      if (err instanceof AppError) {
+        handleAppError(err, res);
       }
     }
   }
