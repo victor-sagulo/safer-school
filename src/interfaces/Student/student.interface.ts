@@ -1,5 +1,5 @@
 import { Student } from "../../entities/Student";
 
-export type StudentCreation = Omit<Student, "id"> & {
+export type StudentCreation = Pick<Student, "name" | "address"> & {
   birth_date: string;
 };
