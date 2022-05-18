@@ -4,7 +4,7 @@ import { handleErrors } from "./errors";
 
 const app = express();
 
-app.use(express.json);
+app.use(express.json());
 
 app.use(handleErrors);
 
