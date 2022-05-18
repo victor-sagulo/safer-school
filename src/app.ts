@@ -10,4 +10,8 @@ app.use(handleErrors);
 
 useRoutes(app);
 
-app.listen(process.env.POSTGRES_PORT || 3000);
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`app running on port ${port}`);
+});
