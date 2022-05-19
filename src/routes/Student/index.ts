@@ -25,5 +25,10 @@ studentRoutes.get(
   validateIdParams,
   StudentController.listStudentRelatives
 );
+studentRoutes.patch(
+  "/addClassroom/:id",
+  validateIdParams,
+  StudentController.addStudentToClassroom
+);
 
 export default studentRoutes;
