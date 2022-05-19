@@ -13,11 +13,11 @@ export class studentsRelatives {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
-  @ManyToOne(() => Student, { eager: true })
+  @ManyToOne(() => Student, { eager: true, onDelete: "SET NULL" })
   @JoinColumn({ name: "student_id" })
   studentId: Student;
 
-  @ManyToOne(() => Relative, { eager: true })
+  @ManyToOne(() => Relative, { eager: true, onDelete: "SET NULL" })
   @JoinColumn({ name: "relative_id" })
   relativeId: Relative;
 
