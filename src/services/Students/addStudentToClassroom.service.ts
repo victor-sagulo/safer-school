@@ -30,7 +30,7 @@ export const addStudentToClassroomService = async (
       classroomId: classroom,
     };
 
-    await studentRepository.update(student, studentClassroom);
+    await studentRepository.update(student.id, studentClassroom);
 
     return studentClassroom;
   } catch (err) {
