@@ -270,6 +270,20 @@ Get /relatives/:id - FORMATO DA RESPOSTA - status 200
 Cadastra um novo estudante:
 
 ```
+Post /students - FORMATO DA REQUISIÇÃO
+```
+
+```json
+{
+	"name": "Rafael Ricciardi",
+	"birth_date": "1997-07-01T11:35:18.768Z",
+	"address": "Lorem ipsum dolor emet"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+```
 Post /students - FORMATO DA RESPOSTA - status 201
 ```
 
@@ -279,14 +293,28 @@ Post /students - FORMATO DA RESPOSTA - status 201
 	"name": "Rafael Ricciardi",
 	"birth_date": "1997-07-01T11:35:18.768Z",
 	"address": "Lorem ipsum dolor emet",
-	"classroom_id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"entered_at": "2020-11-30T18:40:08.316Z",
-	"left_at": "2020-11-30T18:40:08.316Z",
+	"classroom_id": null,
+	"entered_at": null,
+	"left_at": null,
 	"created_at": "2020-11-30T18:40:08.316Z"
 }
 ```
 
 Cadastra um novo responsável:
+
+```
+Post /relatives - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "Rafael Ricciardi",
+	"email": "rafael@gmail.com",
+	"phone": "9999999999999"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
 
 ```
 Post /relatives - FORMATO DA RESPOSTA - status 201
@@ -304,6 +332,19 @@ Post /relatives - FORMATO DA RESPOSTA - status 201
 Cadastra uma nova turma:
 
 ```
+Post /classroom - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "5º ano C",
+	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+```
 Post /classroom - FORMATO DA RESPOSTA - status 201
 ```
 
@@ -316,6 +357,19 @@ Post /classroom - FORMATO DA RESPOSTA - status 201
 ```
 
 Cadastra um novo professor:
+
+```
+Post /teachers - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "Rafael Ricciardi",
+	"email": "rafael@gmail.com"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
 
 ```
 Post /teachers - FORMATO DA RESPOSTA - status 201
@@ -378,6 +432,19 @@ Post /teachers - FORMATO DA RESPOSTA - status 409
 Pode atualizar todos os dados de um estudante, exceto enteredAt e leftAt
 
 ```
+Patch /students/:id - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "Rafael Ricciardi",
+	"address": "Lorem ipsum dolor emet"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+```
 Patch /students/:id - FORMATO DA RESPOSTA - status 209
 ```
 
@@ -412,6 +479,14 @@ Patch /students/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 Altera o horário de entrada
+
+```
+Patch /students/entry/:id - FORMATO DA REQUISAÇÂO
+```
+
+```
+Não é necessário um corpo de requisição
+```
 
 ```
 Patch /students/entry/:id - FORMATO DA RESPOSTA - status 209
@@ -450,6 +525,14 @@ Patch /students/entry/:id - FORMATO DA RESPOSTA - status 209
 Altera o horário de saída
 
 ```
+Patch /students/leave/:id - FORMATO DA REQUISAÇÂO
+```
+
+```
+Não é necessário um corpo de requisição
+```
+
+```
 Patch /students/leave/:id - FORMATO DA RESPOSTA - status 209
 ```
 
@@ -486,6 +569,17 @@ Patch /students/leave/:id - FORMATO DA RESPOSTA - status 209
 Atualiza as informações de um professor
 
 ```
+Patch /teachers/:id - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "Rafael Ricciardi",
+	"email": "rafael@gmail.com"
+}
+```
+
+```
 Patch /teachers/:id - FORMATO DA RESPOSTA - status 209
 ```
 
@@ -503,6 +597,17 @@ Patch /teachers/:id - FORMATO DA RESPOSTA - status 209
 Atualiza as informações de uma turma
 
 ```
+Patch /classroom/:id - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "5º ano C",
+	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+}
+```
+
+```
 Patch /classroom/:id - FORMATO DA RESPOSTA - status 209
 ```
 
@@ -518,6 +623,18 @@ Patch /classroom/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 Atualiza as informações de um responsável
+
+```
+Patch /relatives/:id - FORMATO DA REQUISAÇÂO
+```
+
+```json
+{
+	"name": "Rafael Ricciardi",
+	"email": "rafael@gmail.com",
+	"phone": "9999999999999"
+}
+```
 
 ```
 Patch /relatives/:id - FORMATO DA RESPOSTA - status 209
@@ -614,6 +731,14 @@ Patch /relatives/:id - FORMATO DA RESPOSTA - status 404
 Exclui um estudante
 
 ```
+Delete /students/:id - FORMATO DA REQUISAÇÂO
+```
+
+```
+Não é necessário um corpo de requisição
+```
+
+```
 Delete /students/:id - FORMATO DA RESPOSTA - status 209
 ```
 
@@ -624,6 +749,14 @@ Delete /students/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 Exclui um Responsável
+
+```
+Delete /relatives/:id - FORMATO DA REQUISAÇÂO
+```
+
+```
+Não é necessário um corpo de requisição
+```
 
 ```
 Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
@@ -638,6 +771,14 @@ Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
 Exclui um professor
 
 ```
+Delete /teachers/:id - FORMATO REQUISAÇÂO
+```
+
+```
+Não é necessário um corpo de requisição
+```
+
+```
 Delete /teachers/:id - FORMATO DA RESPOSTA - status 209
 ```
 
@@ -648,6 +789,14 @@ Delete /teachers/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 Exclui uma turma
+
+```
+Delete /classroom/:id - FORMATO DA REQUISAÇÂO
+```
+
+```
+Não é necessário um corpo de requisição
+```
 
 ```
 Delete /classroom/:id - FORMATO DA RESPOSTA - status 209
