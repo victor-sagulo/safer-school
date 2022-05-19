@@ -10,7 +10,7 @@ import { Teacher } from "../Teacher";
 @Entity()
 export class Classroom {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  readonly id: string;
 
   @Column({ nullable: false, length: 128 })
   name: string;
@@ -19,8 +19,8 @@ export class Classroom {
   @JoinColumn({ name: "teacher_id" })
   teacherId?: Teacher;
 
-  constructor(name: string, teacherId?: Teacher) {
+  constructor(name: string, teacher?: Teacher) {
     this.name = name;
-    this.teacherId = teacherId;
+    this.teacherId = teacher;
   }
 }

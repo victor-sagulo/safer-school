@@ -11,7 +11,7 @@ import { Classroom } from "../Classroom";
 @Entity()
 export class Student {
   @PrimaryGeneratedColumn("uuid")
-  id: string;
+  readonly id: string;
 
   @Column({ nullable: false, length: 128 })
   name: string;
@@ -24,22 +24,28 @@ export class Student {
 
   @OneToOne(() => Classroom, { eager: true })
   @JoinColumn({ name: "classroom_id" })
-  classroomId: string;
+  classroomId?: Classroom;
 
   @Column({ name: "entered_at", nullable: true })
-  enteredAt: Date;
+  enteredAt?: Date;
 
   @Column({ name: "left_at", nullable: true })
-  leftAt: Date;
+  leftAt?: Date;
 
   @CreateDateColumn({
     name: "created_at",
   })
   createdAt: Date;
 
-  constructor(name: string, birthDate: string, address: string) {
+  constructor(
+    name: string,
+    birthDate: string,
+    address: string,
+    classroom?: Classroom
+  ) {
     this.name = name;
     this.birthDate = new Date(birthDate);
     this.address = address;
+    this.classroomId = classroom;
   }
 }
