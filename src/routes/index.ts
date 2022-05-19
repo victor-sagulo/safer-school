@@ -9,5 +9,5 @@ export const useRoutes = (app: Express) => {
   app.use("/students", studentRoutes);
   app.use("/teachers", teacherRoutes);
   app.use("/classroom", classroomRoutes);
-  app.use("/relative", relativeRoutes);
+  app.use("/relatives", relativeRoutes);
 };
