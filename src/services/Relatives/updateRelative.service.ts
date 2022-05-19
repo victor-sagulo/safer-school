@@ -2,7 +2,7 @@ import { AppDataSource } from "../../data-source";
 import { Relative } from "../../entities";
 import { AppError } from "../../errors";
 
-export const updateRelationService = async ({
+export const updateRelativeService = async ({
   id,
   name,
   email,
