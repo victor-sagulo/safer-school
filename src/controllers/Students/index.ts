@@ -1,10 +1,12 @@
 import { Request, Response } from "express";
 import { AppError, handleAppError } from "../../errors";
 import {
+  addStudentsRelativesService,
   createStudentService,
   deleteStudentService,
   enteredAtService,
   leftAtService,
+  listAllStudentRelativesService,
   listOneStudentService,
   listStudentsService,
   updateStudentService,
@@ -84,6 +86,37 @@ export class StudentController {
     try {
       const response = await leftAtService(id);
       return res.status(200).json({ message: response });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleAppError(err, res);
+      }
+    }
+  }
+
+  static async addStudentRelative(req: Request, res: Response) {
+    const { studentId, relativeId, parentLevel } = req.body;
+    try {
+      const newStudentRelative = await addStudentsRelativesService({
+        studentId,
+        relativeId,
+        parentLevel,
+      });
+
+      return res.status(201).json(newStudentRelative);
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleAppError(err, res);
+      }
+    }
+  }
+
+  static async listStudentRelatives(req: Request, res: Response) {
+    const { id } = req.params;
+
+    try {
+      const studentRelatives = await listAllStudentRelativesService(id);
+
+      return res.status(200).json(studentRelatives);
     } catch (err) {
       if (err instanceof AppError) {
         handleAppError(err, res);

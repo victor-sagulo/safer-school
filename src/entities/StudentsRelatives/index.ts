@@ -9,7 +9,7 @@ import { Relative } from "../Relative";
 import { Student } from "../Student";
 
 @Entity()
-export class studentsRelatives {
+export class StudentsRelatives {
   @PrimaryGeneratedColumn("uuid")
   readonly id: string;
 
