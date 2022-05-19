@@ -35,15 +35,16 @@ describe("Testing teachers list", () => {
   it("should be able to list only one teacher by id", async () => {
     const teacherExample = teacherExamples[0];
     const teacherRepository = AppDataSource.getRepository(Teacher);
-    const teacher = await teacherRepository.findOneBy({
+    const teacherToVerify = await teacherRepository.findOneBy({
       email: teacherExample.email,
     });
-    if (teacher) {
-      const response = await request(app).get(`/teachers/${teacher.id}`);
-      const teachersList = response.body;
+    if (teacherToVerify) {
+      const response = await request(app).get(
+        `/teachers/${teacherToVerify.id}`
+      );
+      const teacher = response.body;
       expect(response.statusCode).toBe(200);
-      expect(teachersList).toHaveLength(1);
-      expect(teachersList[0]).toMatchObject({ ...teacher });
+      expect(teacher).toMatchObject({ ...teacher });
     }
   });
 });

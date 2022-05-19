@@ -14,7 +14,7 @@ export const createTeacherService = async ({
   });
 
   if (findTeacher) {
-    throw new AppError(409, "This teacher already exists in our database");
+    throw new AppError(409, "This email already exists");
   }
 
   const teacher = new Teacher(name, email);

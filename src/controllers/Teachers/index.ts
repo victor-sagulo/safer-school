@@ -3,6 +3,7 @@ import { AppError, handleAppError } from "../../errors";
 import {
   createTeacherService,
   deleteTeacherService,
+  listOneTeacherService,
   listTeacherService,
   updateTeacherService,
 } from "../../services";
@@ -10,21 +11,24 @@ import {
 export class TeacherController {
   static async store(req: Request, res: Response) {
     const { name, email } = req.body;
-    try {
-      const createTeacher = await createTeacherService({ name, email });
 
-      return res.status(201).json(createTeacher);
-    } catch (err) {
-      if (err instanceof AppError) {
-        handleAppError(err, res);
-      }
-    }
+    const createTeacher = await createTeacherService({ name, email });
+
+    return res.status(201).json(createTeacher);
   }
 
   static async index(req: Request, res: Response) {
     const teachers = await listTeacherService();
 
     return res.status(200).json(teachers);
+  }
+
+  static async show(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const teacher = await listOneTeacherService(id);
+
+    return res.status(200).json(teacher);
   }
 
   static async update(req: Request, res: Response) {
@@ -43,14 +47,8 @@ export class TeacherController {
 
   static async delete(req: Request, res: Response) {
     const { id } = req.params;
-    try {
-      await deleteTeacherService(id);
+    await deleteTeacherService(id);
 
-      return res.status(204).json();
-    } catch (err) {
-      if (err instanceof AppError) {
-        return handleAppError(err, res);
-      }
-    }
+    return res.status(204).json();
   }
 }
