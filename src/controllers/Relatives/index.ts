@@ -7,7 +7,7 @@ import {
   deleteRelativeService,
 } from "../../services";
 
-export class Relatives {
+export class RelativesController {
   static async store(req: Request, res: Response) {
     const { name, email, phone } = req.body;
 
