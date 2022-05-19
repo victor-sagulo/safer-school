@@ -6,12 +6,15 @@ import {
   deleteClassroomService,
   listClassroomService,
   listOneClassroomService,
-} from "../../services/Classroom";
+} from "../../services";
 
 export class ClassroomController {
   static async store(req: Request, res: Response) {
+    const { name, teacherId } = req.body;
     try {
-      const { name, teacherId } = req.body;
+      if (!name) {
+        throw new AppError(400, "You must provide a name to the classroom");
+      }
       const newClassroom = await createClassroomService({ name, teacherId });
 
       return res.status(201).json(newClassroom);
