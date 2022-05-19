@@ -15,7 +15,7 @@ export class Classroom {
   @Column({ nullable: false, length: 128 })
   name: string;
 
-  @OneToOne(() => Teacher, { onDelete: "SET NULL" })
+  @OneToOne(() => Teacher, { onDelete: "SET NULL", eager: true })
   @JoinColumn({ name: "teacher_id" })
   teacherId?: Teacher;
 
