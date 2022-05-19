@@ -17,9 +17,10 @@ export class Classroom {
 
   @OneToOne(() => Teacher)
   @JoinColumn({ name: "teacher_id" })
-  teacherId: Teacher;
+  teacherId?: Teacher;
 
-  constructor(name: string) {
+  constructor(name: string, teacherId?: Teacher) {
     this.name = name;
+    this.teacherId = teacherId;
   }
 }
