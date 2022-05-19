@@ -11,7 +11,7 @@ export class Relatives {
   static async store(req: Request, res: Response) {
     const { name, email, phone } = req.body;
 
-    const createRelative = createRelativeService({ name, email, phone });
+    const createRelative = await createRelativeService({ name, email, phone });
 
     return res.status(201).json(createRelative);
   }
