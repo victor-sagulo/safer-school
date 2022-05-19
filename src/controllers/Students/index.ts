@@ -2,6 +2,7 @@ import { Request, Response } from "express";
 import { AppError, handleAppError } from "../../errors";
 import {
   addStudentsRelativesService,
+  addStudentToClassroomService,
   createStudentService,
   deleteStudentService,
   enteredAtService,
@@ -117,6 +118,24 @@ export class StudentController {
       const studentRelatives = await listAllStudentRelativesService(id);
 
       return res.status(200).json(studentRelatives);
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleAppError(err, res);
+      }
+    }
+  }
+
+  static async addStudentToClassroom(req: Request, res: Response) {
+    const { id } = req.params;
+    const { classroomId } = req.body;
+
+    try {
+      const addStudentClassroom = await addStudentToClassroomService(
+        id,
+        classroomId
+      );
+
+      return res.status(200).json(addStudentClassroom);
     } catch (err) {
       if (err instanceof AppError) {
         handleAppError(err, res);
