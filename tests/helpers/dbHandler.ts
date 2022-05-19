@@ -8,7 +8,6 @@ import { teacherExamples } from "../fixtures/teachers";
 export const dbConnect = async () => {
   try {
     const connection = await AppDataSource.initialize();
-    console.log("Database connected");
     return connection;
   } catch (error) {
     console.error("Database error", error);
