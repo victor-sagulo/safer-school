@@ -1,6 +1,5 @@
 # safer-school
 
-
 Este é o backend da aplicação safer-school - Uma forma de controlar as entradas e saídas dos alunos de uma determinada instituição de ensino, onde cada aluno possui um responsável que pode retirá-lo da escola ao final das aulas.
 
 ##Rotas de listagem (Get)
@@ -87,7 +86,7 @@ Get /students - FORMATO DA RESPOSTA - status 200
 ```
 
 ```
-Get /students/me/:id - FORMATO DA RESPOSTA - status 200
+Get /students/:id - FORMATO DA RESPOSTA - status 200
 ```
 
 ```json
@@ -161,6 +160,18 @@ Get /teachers - FORMATO DA RESPOSTA - status 200
 ```
 
 ```
+Get /teachers/:id - FORMATO DA RESPOSTA - status 200
+```
+
+```json
+{
+	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
+	"name": "Rafael Ricciardi",
+	"email": "rafael@gmail.com"
+}
+```
+
+```
 Get /classroom - FORMATO DA RESPOSTA - status 200
 ```
 
@@ -185,7 +196,7 @@ Get /classroom - FORMATO DA RESPOSTA - status 200
 ```
 
 ```
-Get /classroom/me/:id - FORMATO DA RESPOSTA - status 200
+Get /classroom/:id - FORMATO DA RESPOSTA - status 200
 ```
 
 ```json
@@ -221,6 +232,19 @@ Get /relatives - FORMATO DA RESPOSTA - status 200
 		"phone": "9999999999999"
 	}
 ]
+```
+
+```
+Get /relatives/:id - FORMATO DA RESPOSTA - status 200
+```
+
+```json
+{
+	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
+	"name": "Rafael Ricciardi",
+	"email": "rafael@gmail.com",
+	"phone": "9999999999999"
+}
 ```
 
 ##Rotas de criação (Post)
@@ -316,7 +340,7 @@ Patch /students/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 ```
-Patch /students/entered/:id - FORMATO DA RESPOSTA - status 209
+Patch /students/entry/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 ```json
@@ -350,7 +374,7 @@ Patch /students/entered/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 ```
-Patch /students/left/:id - FORMATO DA RESPOSTA - status 209
+Patch /students/leave/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 ```json
@@ -462,7 +486,7 @@ Delete /teachers/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 ```
-Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
+Delete /classroom/:id - FORMATO DA RESPOSTA - status 209
 ```
 
 ```json
@@ -470,4 +494,3 @@ Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
 	"message": "Classroom successfully deleted"
 }
 ```
-
