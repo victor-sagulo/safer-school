@@ -19,5 +19,11 @@ studentRoutes.patch(
   StudentController.updateLeave
 );
 studentRoutes.delete("/:id", validateIdParams, StudentController.delete);
+studentRoutes.post("/relatives", StudentController.addStudentRelative);
+studentRoutes.get(
+  "/relatives/:id",
+  validateIdParams,
+  StudentController.listStudentRelatives
+);
 
 export default studentRoutes;

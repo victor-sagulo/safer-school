@@ -5,3 +5,5 @@ export * from "./enteredAt.service";
 export * from "./leftAt.service";
 export * from "./listOneStudent.service";
 export * from "./updateStudent.service";
+export * from "./addStudentsRelative.service";
+export * from "./listAllStudentRelatives.service";
