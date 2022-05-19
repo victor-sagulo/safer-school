@@ -11,8 +11,8 @@ import {
 export class ClassroomController {
   static async store(req: Request, res: Response) {
     try {
-      const { name } = req.body;
-      const newClassroom = await createClassroomService(name);
+      const { name, teacherId } = req.body;
+      const newClassroom = await createClassroomService({ name, teacherId });
 
       return res.status(201).json(newClassroom);
     } catch (err) {
