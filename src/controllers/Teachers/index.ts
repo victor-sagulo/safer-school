@@ -12,9 +12,21 @@ export class TeacherController {
   static async store(req: Request, res: Response) {
     const { name, email } = req.body;
 
-    const createTeacher = await createTeacherService({ name, email });
+    try {
+      if (!name || !email) {
+        throw new AppError(
+          400,
+          "You must provide a name and email to register a teacher"
+        );
+      }
+      const createTeacher = await createTeacherService({ name, email });
 
-    return res.status(201).json(createTeacher);
+      return res.status(201).json(createTeacher);
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleAppError(err, res);
+      }
+    }
   }
 
   static async index(req: Request, res: Response) {
@@ -35,6 +47,10 @@ export class TeacherController {
     const { id } = req.params;
     const { name, email } = req.body;
     try {
+      if (!name && !email) {
+        throw new AppError(400, "You must provide data to be updated");
+      }
+
       const updatedTeacher = await updateTeacherService({ id, name, email });
 
       return res.status(200).json(updatedTeacher);

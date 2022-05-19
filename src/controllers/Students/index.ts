@@ -45,6 +45,9 @@ export class StudentController {
     const { id } = req.params;
     const { name, address } = req.body;
     try {
+      if (!name && !address) {
+        throw new AppError(400, "You must provide data to be updated");
+      }
       const student = await updateStudentService({ id, name, address });
       return res.status(200).json(student);
     } catch (err) {

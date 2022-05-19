@@ -2,7 +2,9 @@
 
 Este é o backend da aplicação safer-school - Uma forma de controlar as entradas e saídas dos alunos de uma determinada instituição de ensino, onde cada aluno possui um responsável que pode retirá-lo da escola ao final das aulas.
 
-##Rotas de listagem (Get)
+## Listagem (Get)
+
+Lista todos os estudantes cadastrados utilizando o endpoint:
 
 ```
 Get /students - FORMATO DA RESPOSTA - status 200
@@ -85,6 +87,8 @@ Get /students - FORMATO DA RESPOSTA - status 200
 ]
 ```
 
+Acessa um estudante específico a partir do id utilizando o endpoint:
+
 ```
 Get /students/:id - FORMATO DA RESPOSTA - status 200
 ```
@@ -116,6 +120,8 @@ Get /students/:id - FORMATO DA RESPOSTA - status 200
 }
 ```
 
+Lista todos os responsáveis por um determinado aluno utilizando o endpoint:
+
 ```
 Get students/relatives/:id - FORMATO DA RESPOSTA - status 200
 ```
@@ -134,6 +140,8 @@ Get students/relatives/:id - FORMATO DA RESPOSTA - status 200
     "phone": "9999999999999"
 }
 ```
+
+Lista todos os professores utilizando o endpoint:
 
 ```
 Get /teachers - FORMATO DA RESPOSTA - status 200
@@ -159,6 +167,8 @@ Get /teachers - FORMATO DA RESPOSTA - status 200
 ]
 ```
 
+Acessa um professor específico a partir do id utilizando o endpoint:
+
 ```
 Get /teachers/:id - FORMATO DA RESPOSTA - status 200
 ```
@@ -170,6 +180,8 @@ Get /teachers/:id - FORMATO DA RESPOSTA - status 200
 	"email": "rafael@gmail.com"
 }
 ```
+
+Lista todas as turmas cadastradas utilizando o endpoint:
 
 ```
 Get /classroom - FORMATO DA RESPOSTA - status 200
@@ -195,6 +207,8 @@ Get /classroom - FORMATO DA RESPOSTA - status 200
 ]
 ```
 
+Acessa uma turma específica a partir do id utilizando o endpoint:
+
 ```
 Get /classroom/:id - FORMATO DA RESPOSTA - status 200
 ```
@@ -206,6 +220,8 @@ Get /classroom/:id - FORMATO DA RESPOSTA - status 200
 	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
 }
 ```
+
+Lista todos os responsáveis cadastrados utilizando o endpoint:
 
 ```
 Get /relatives - FORMATO DA RESPOSTA - status 200
@@ -234,6 +250,8 @@ Get /relatives - FORMATO DA RESPOSTA - status 200
 ]
 ```
 
+Acessa um responsável específico a partir do id utilizando o endpoint:
+
 ```
 Get /relatives/:id - FORMATO DA RESPOSTA - status 200
 ```
@@ -247,7 +265,9 @@ Get /relatives/:id - FORMATO DA RESPOSTA - status 200
 }
 ```
 
-##Rotas de criação (Post)
+## Rotas de criação (Post)
+
+Cadastra um novo estudante:
 
 ```
 Post /students - FORMATO DA RESPOSTA - status 201
@@ -266,6 +286,8 @@ Post /students - FORMATO DA RESPOSTA - status 201
 }
 ```
 
+Cadastra um novo responsável:
+
 ```
 Post /relatives - FORMATO DA RESPOSTA - status 201
 ```
@@ -279,6 +301,8 @@ Post /relatives - FORMATO DA RESPOSTA - status 201
 }
 ```
 
+Cadastra uma nova turma:
+
 ```
 Post /classroom - FORMATO DA RESPOSTA - status 201
 ```
@@ -290,6 +314,8 @@ Post /classroom - FORMATO DA RESPOSTA - status 201
 	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
 }
 ```
+
+Cadastra um novo professor:
 
 ```
 Post /teachers - FORMATO DA RESPOSTA - status 201
@@ -303,7 +329,53 @@ Post /teachers - FORMATO DA RESPOSTA - status 201
 }
 ```
 
-##rotas de atualização de dados (Patch)
+### Possíveis erros
+
+Email já cadastrado:
+
+```
+Post /relatives - FORMATO DA RESPOSTA - status 409
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 409,
+	"message": "This email is already being used"
+}
+```
+
+Esta turma já existe:
+
+```
+Post /classroom - FORMATO DA RESPOSTA - status 409
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 409,
+	"message": "This classroom already exists in our database"
+}
+```
+
+Este email já foi cadastrado:
+
+```
+Post /teachers - FORMATO DA RESPOSTA - status 409
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 409,
+	"message": "This email already exists"
+}
+```
+
+## rotas de atualização de dados (Patch)
+
+Pode atualizar todos os dados de um estudante, exceto enteredAt e leftAt
 
 ```
 Patch /students/:id - FORMATO DA RESPOSTA - status 209
@@ -339,6 +411,8 @@ Patch /students/:id - FORMATO DA RESPOSTA - status 209
 }
 ```
 
+Altera o horário de entrada
+
 ```
 Patch /students/entry/:id - FORMATO DA RESPOSTA - status 209
 ```
@@ -372,6 +446,8 @@ Patch /students/entry/:id - FORMATO DA RESPOSTA - status 209
 	}
 }
 ```
+
+Altera o horário de saída
 
 ```
 Patch /students/leave/:id - FORMATO DA RESPOSTA - status 209
@@ -407,6 +483,8 @@ Patch /students/leave/:id - FORMATO DA RESPOSTA - status 209
 }
 ```
 
+Atualiza as informações de um professor
+
 ```
 Patch /teachers/:id - FORMATO DA RESPOSTA - status 209
 ```
@@ -422,6 +500,8 @@ Patch /teachers/:id - FORMATO DA RESPOSTA - status 209
 }
 ```
 
+Atualiza as informações de uma turma
+
 ```
 Patch /classroom/:id - FORMATO DA RESPOSTA - status 209
 ```
@@ -436,6 +516,8 @@ Patch /classroom/:id - FORMATO DA RESPOSTA - status 209
 	}
 }
 ```
+
+Atualiza as informações de um responsável
 
 ```
 Patch /relatives/:id - FORMATO DA RESPOSTA - status 209
@@ -453,7 +535,83 @@ Patch /relatives/:id - FORMATO DA RESPOSTA - status 209
 }
 ```
 
+### Possíveis erros
+
+```
+Patch /students/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Student not found or doesn't exists"
+}
+```
+
+```
+Patch /students/entry/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Student not found or doesn't exists"
+}
+```
+
+```
+Patch /students/leave/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Student not found or doesn't exists"
+}
+```
+
+```
+Patch /teachers/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Teacher not found or doesn't exists"
+}
+```
+
+```
+Patch /classroom/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Classroom not found or doesn't exists"
+}
+```
+
+```
+Patch /relatives/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Relative not found"
+}
+```
+
 ## Rotas de deleção (delete)
+
+Exclui um estudante
 
 ```
 Delete /students/:id - FORMATO DA RESPOSTA - status 209
@@ -465,6 +623,8 @@ Delete /students/:id - FORMATO DA RESPOSTA - status 209
 }
 ```
 
+Exclui um Responsável
+
 ```
 Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
 ```
@@ -474,6 +634,8 @@ Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
 	"message": "Relative successfully deleted"
 }
 ```
+
+Exclui um professor
 
 ```
 Delete /teachers/:id - FORMATO DA RESPOSTA - status 209
@@ -485,6 +647,8 @@ Delete /teachers/:id - FORMATO DA RESPOSTA - status 209
 }
 ```
 
+Exclui uma turma
+
 ```
 Delete /classroom/:id - FORMATO DA RESPOSTA - status 209
 ```
@@ -492,5 +656,55 @@ Delete /classroom/:id - FORMATO DA RESPOSTA - status 209
 ```json
 {
 	"message": "Classroom successfully deleted"
+}
+```
+
+### Possíveis erros
+
+```
+Patch /students/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Student not found or doesn't exists"
+}
+```
+
+```
+Patch /relatives/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Relative not found"
+}
+```
+
+```
+Patch /teachers/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Teacher not found or doesn't exists"
+}
+```
+
+```
+Patch /classroom/:id - FORMATO DA RESPOSTA - status 404
+```
+
+```json
+{
+	"status": "err",
+	"statusCode": 404,
+	"message": "Classroom not found or doesn't exists"
 }
 ```
