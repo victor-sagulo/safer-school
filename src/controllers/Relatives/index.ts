@@ -19,7 +19,7 @@ export class Relatives {
   static async index(req: Request, res: Response) {
     const listRelatives = await listRelativeService();
 
-    return res.json(listRelatives);
+    return res.status(200).json(listRelatives);
   }
 
   static async show(req: Request, res: Response) {
