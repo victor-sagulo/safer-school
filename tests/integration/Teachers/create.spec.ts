@@ -59,10 +59,10 @@ describe("Testing teachers creation", () => {
       .post("/teachers")
       .send(teacherSameEmail);
 
-    const teacherCreated = response.body;
-
-    expect(response.statusCode).toBe(400);
-    expect(teacherCreated).toBeUndefined();
+    expect(response.statusCode).toBe(409);
+    expect(response.body.id).toBeUndefined();
+    expect(response.body.message).toBe("This email already exists");
+    expect(response.body.status).toBe("error");
 
     const teacherRepository = AppDataSource.getRepository(Teacher);
 

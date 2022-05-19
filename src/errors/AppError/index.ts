@@ -4,13 +4,12 @@ export class AppError extends Error {
   statusCode: number;
 
   constructor(statusCode: number, message: string) {
-    super();
+    super(message);
     this.statusCode = statusCode;
-    this.message = message;
   }
 }
 
-export const handleAppError = (err: AppError, res: Response) => {
+export const handleAppError = (err: any, res: Response) => {
   return res.status(err.statusCode).json({
     status: "err",
     statusCode: err.statusCode,

@@ -34,8 +34,7 @@ describe("Testing teachers deletion", () => {
     if (teacher) {
       const response = await request(app).delete(`/teachers/${teacher.id}`);
 
-      expect(response.statusCode).toBe(200);
-      expect(response.body.message).toBeDefined();
+      expect(response.statusCode).toBe(204);
 
       const entityLength = await teacherRepository.count();
 
@@ -44,9 +43,12 @@ describe("Testing teachers deletion", () => {
   });
 
   it("should not be able to list a false id", async () => {
-    const response = await request(app).delete("/teachers/5");
+    const response = await request(app).delete(
+      "/teachers/2b133b1b-97dd-4e3d-a8d8-e86da085f43d"
+    );
 
-    expect(response.statusCode).toBe(400);
-    expect(response.body).toBeUndefined();
+    expect(response.statusCode).toBe(404);
+    expect(response.body.message).toBe("Teacher not found or doesn't exists");
+    expect(response.body.status).toBe("error");
   });
 });

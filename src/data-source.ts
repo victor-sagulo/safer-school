@@ -15,7 +15,7 @@ const prodDataSourceOptions: DataSourceOptions = {
 const devDataSourceOptions: DataSourceOptions = {
   type: "postgres",
   url: process.env.DATABASE_URL,
-  ssl: { rejectUnauthorized: false },
+  ssl: false,
   synchronize: false,
   logging: true,
   entities: ["src/entities/*/*.ts"],
@@ -24,7 +24,7 @@ const devDataSourceOptions: DataSourceOptions = {
 
 const testDataSourceOptions: DataSourceOptions = {
   type: "postgres",
-  url: "postgres://postgres:postgres@localhost:5432/test_database",
+  url: "postgres://postgres:postgres@localhost:5434/test_database",
   synchronize: true,
   logging: false,
   entities: ["src/entities/*/*.ts"],
