@@ -857,3 +857,5 @@ Patch /classroom/:id - FORMATO DA RESPOSTA - status 404
 	"message": "Classroom not found or doesn't exists"
 }
 ```
+
+cawawdad
