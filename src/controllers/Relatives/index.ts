@@ -1,4 +1,5 @@
 import { Request, Response } from "express";
+import { AppError } from "../../errors";
 import {
   createRelativeService,
   listRelativeService,
@@ -33,6 +34,10 @@ export class RelativesController {
   static async update(req: Request, res: Response) {
     const { id } = req.params;
     const { name, email, phone } = req.body;
+
+    if (!name && !email && !phone) {
+      throw new AppError(400, "You must provide data to be updated");
+    }
 
     const updatedRelative = await updateRelativeService({
       id,
