@@ -129,6 +129,10 @@ export class StudentController {
     const { id } = req.params;
     const { classroomId } = req.body;
 
+    if (!classroomId) {
+      throw new AppError(400, "You must provide a classroomId");
+    }
+
     try {
       const addStudentClassroom = await addStudentToClassroomService(
         id,

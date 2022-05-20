@@ -26,7 +26,7 @@ studentRoutes.get(
   StudentController.listStudentRelatives
 );
 studentRoutes.patch(
-  "/addClassroom/:id",
+  "/classroom/:id",
   validateIdParams,
   StudentController.addStudentToClassroom
 );

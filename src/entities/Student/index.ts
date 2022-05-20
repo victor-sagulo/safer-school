@@ -3,7 +3,7 @@ import {
   CreateDateColumn,
   Entity,
   JoinColumn,
-  OneToOne,
+  ManyToOne,
   PrimaryGeneratedColumn,
 } from "typeorm";
 import { Classroom } from "../Classroom";
@@ -22,7 +22,7 @@ export class Student {
   @Column({ nullable: false })
   address: string;
 
-  @OneToOne(() => Classroom, { eager: true, onDelete: "SET NULL" })
+  @ManyToOne(() => Classroom, { eager: true, onDelete: "SET NULL" })
   @JoinColumn({ name: "classroom_id" })
   classroomId?: Classroom;
 

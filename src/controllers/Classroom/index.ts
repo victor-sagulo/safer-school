@@ -7,6 +7,7 @@ import {
   listClassroomService,
   listOneClassroomService,
 } from "../../services";
+import { listStudentsClassroomService } from "../../services/Classroom/listStudentsClassroom.service";
 
 export class ClassroomController {
   static async store(req: Request, res: Response) {
@@ -77,6 +78,18 @@ export class ClassroomController {
       return res
         .status(204)
         .json({ message: "Classroom deleted with success" });
+    } catch (err) {
+      if (err instanceof AppError) {
+        handleAppError(err, res);
+      }
+    }
+  }
+
+  static async listStudents(req: Request, res: Response) {
+    try {
+      const { id } = req.params;
+      const students = await listStudentsClassroomService(id);
+      return res.status(200).json(students);
     } catch (err) {
       if (err instanceof AppError) {
         handleAppError(err, res);
