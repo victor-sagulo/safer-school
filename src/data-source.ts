@@ -8,8 +8,8 @@ const prodDataSourceOptions: DataSourceOptions = {
   ssl: { rejectUnauthorized: false },
   synchronize: false,
   logging: true,
-  entities: ["dist/entities/*/*.ts"],
-  migrations: ["dist/migrations/*.ts"],
+  entities: ["dist/src/entities/*/*.js"],
+  migrations: ["dist/src/migrations/*.js"],
 };
 
 const devDataSourceOptions: DataSourceOptions = {
