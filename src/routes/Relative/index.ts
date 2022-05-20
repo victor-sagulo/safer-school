@@ -19,5 +19,10 @@ relativeRoutes.patch(
   RelativesController.update
 );
 relativeRoutes.delete("/:id", validateIdParams, RelativesController.delete);
+relativeRoutes.get(
+  "/students/:id",
+  validateIdParams,
+  RelativesController.listStudents
+);
 
 export default relativeRoutes;
