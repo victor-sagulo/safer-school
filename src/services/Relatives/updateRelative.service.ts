@@ -17,6 +17,14 @@ export const updateRelativeService = async ({
       throw new AppError(404, "Relative not found");
     }
 
+    if (email) {
+      const verifyEmail = await relativeRepository.findOneBy({ email });
+
+      if (verifyEmail) {
+        throw new AppError(409, "This email is already in use");
+      }
+    }
+
     const updatedRelative = {
       id: relative.id,
       name: name || relative.name,

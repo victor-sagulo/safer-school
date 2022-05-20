@@ -56,6 +56,10 @@ export class ClassroomController {
       const { id } = req.params;
       const { name, teacherId } = req.body;
 
+      if (!name && !teacherId) {
+        throw new AppError(400, "You must provide data to be updated");
+      }
+
       const classroomUpdated = await updateClassroomService({
         id,
         name,
