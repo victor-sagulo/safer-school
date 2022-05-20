@@ -6,6 +6,7 @@ import {
   listOneRelativeService,
   updateRelativeService,
   deleteRelativeService,
+  listAllStudentsByRelativeService,
 } from "../../services";
 
 export class RelativesController {
@@ -55,5 +56,13 @@ export class RelativesController {
     await deleteRelativeService(id);
 
     return res.status(204).json();
+  }
+
+  static async listStudents(req: Request, res: Response) {
+    const { id } = req.params;
+
+    const students = await listAllStudentsByRelativeService(id);
+
+    return res.status(200).json(students);
   }
 }
