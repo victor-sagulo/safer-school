@@ -42,21 +42,21 @@ describe("Testing teachers deletion", () => {
     }
   });
 
-  it("should not be able to list a false id", async () => {
+  it("should not be able to delete a false id", async () => {
     const response = await request(app).delete(
       "/teachers/2b133b1b-97dd-4e3d-a8d8-e86da085f43f"
     );
 
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toBe("Teacher not found or doesn't exists");
-    expect(response.body.status).toBe("error");
+    expect(response.body.status).toBe("err");
   });
 
-  it("should not be able to list a invalid id (not uuid)", async () => {
+  it("should not be able to delete a invalid id (not uuid)", async () => {
     const response = await request(app).delete("/teachers/5");
 
     expect(response.statusCode).toBe(400);
     expect(response.body.message).toBe("Invalid id");
-    expect(response.body.status).toBe("error");
+    expect(response.body.status).toBe("err");
   });
 });
