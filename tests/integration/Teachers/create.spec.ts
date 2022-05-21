@@ -62,7 +62,7 @@ describe("Testing teachers creation", () => {
     expect(response.statusCode).toBe(409);
     expect(response.body.id).toBeUndefined();
     expect(response.body.message).toBe("This email already exists");
-    expect(response.body.status).toBe("err");
+    expect(response.body.status).toBe("error");
 
     const countTeachers = await teacherRepository.countBy({
       email: teacherSameEmail.email,

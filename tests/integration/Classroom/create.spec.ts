@@ -68,7 +68,7 @@ describe("Testing classroom creation", () => {
     });
 
     expect(response.statusCode).toBe(409);
-    expect(response.body.status).toBe("err");
+    expect(response.body.status).toBe("error");
     expect(response.body.message).toBe(
       "This classroom already exists in our database"
     );

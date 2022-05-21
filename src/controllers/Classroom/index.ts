@@ -77,11 +77,9 @@ export class ClassroomController {
   static async delete(req: Request, res: Response) {
     try {
       const { id } = req.params;
-      const deletedClassroom = await deleteClassroomService(id);
+      await deleteClassroomService(id);
 
-      return res
-        .status(204)
-        .json({ message: "Classroom deleted with success" });
+      return res.sendStatus(204);
     } catch (err) {
       if (err instanceof AppError) {
         handleAppError(err, res);

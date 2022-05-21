@@ -49,7 +49,7 @@ describe("Testing classroom deletion", () => {
 
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toBe("Classroom not found or doesn't exists");
-    expect(response.body.status).toBe("err");
+    expect(response.body.status).toBe("error");
   });
 
   it("should not be able to list a invalid id (not uuid)", async () => {
@@ -57,6 +57,6 @@ describe("Testing classroom deletion", () => {
 
     expect(response.statusCode).toBe(400);
     expect(response.body.message).toBe("Invalid id");
-    expect(response.body.status).toBe("err");
+    expect(response.body.status).toBe("error");
   });
 });

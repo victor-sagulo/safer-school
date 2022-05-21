@@ -77,7 +77,7 @@ describe("Testing teachers update", () => {
       const teacherUpdated = response.body;
 
       expect(response.statusCode).toBe(400);
-      expect(teacherUpdated.status).toBe("err");
+      expect(teacherUpdated.status).toBe("error");
       expect(teacherUpdated.message).toBe(
         "You must provide data to be updated"
       );
