@@ -25,6 +25,7 @@ describe("Testing teachers list", () => {
   it("should be able to list all teachers", async () => {
     const response = await request(app).get("/teachers");
     const teachersList = response.body;
+
     expect(response.statusCode).toBe(200);
     expect(teachersList).toHaveLength(4);
 
@@ -34,10 +35,13 @@ describe("Testing teachers list", () => {
   });
   it("should be able to list only one teacher by id", async () => {
     const teacherExample = teacherExamples[0];
+
     const teacherRepository = AppDataSource.getRepository(Teacher);
+
     const teacherToVerify = await teacherRepository.findOneBy({
       email: teacherExample.email,
     });
+
     if (teacherToVerify) {
       const response = await request(app).get(
         `/teachers/${teacherToVerify.id}`

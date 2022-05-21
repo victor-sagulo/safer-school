@@ -31,6 +31,8 @@ afterAll(async () => {
 });
 
 describe("Testing teachers creation", () => {
+  const teacherRepository = AppDataSource.getRepository(Teacher);
+
   it("should be able to create a new teacher", async () => {
     const response = await request(app).post("/teachers").send(teacherExample);
 
@@ -40,8 +42,6 @@ describe("Testing teachers creation", () => {
     expect(typeof teacherCreated.id).toBe("string");
     expect(teacherCreated.name).toBe(teacherExample.name);
     expect(teacherCreated.email).toBe(teacherExample.email);
-
-    const teacherRepository = AppDataSource.getRepository(Teacher);
 
     const teacherFromDb = await teacherRepository.findOneBy({
       email: teacherExample.email,
@@ -63,8 +63,6 @@ describe("Testing teachers creation", () => {
     expect(response.body.id).toBeUndefined();
     expect(response.body.message).toBe("This email already exists");
     expect(response.body.status).toBe("error");
-
-    const teacherRepository = AppDataSource.getRepository(Teacher);
 
     const countTeachers = await teacherRepository.countBy({
       email: teacherSameEmail.email,
