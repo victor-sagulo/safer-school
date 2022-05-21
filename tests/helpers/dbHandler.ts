@@ -1,8 +1,10 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "../../src/data-source";
+import { Relative } from "../../src/entities";
 import { Classroom } from "../../src/entities/Classroom";
 import { Teacher } from "../../src/entities/Teacher";
 import { classroomExamples } from "../fixtures/classroom";
+import { relativeExamples } from "../fixtures/relatives";
 import { teacherExamples } from "../fixtures/teachers";
 
 export const dbConnect = async () => {
@@ -37,11 +39,28 @@ export const populateDb = async () => {
   const classroomRepository = AppDataSource.getRepository(Classroom);
 
   await Promise.all(
-    classroomExamples.map(async ({ name, teacherId }) => {
+    (classroomExamples as Classroom[]).map(async ({ name, teacherId }) => {
       if (teacherId) {
         const newClassroom = new Classroom(name, teacherId);
         await classroomRepository.save(newClassroom);
       }
     })
   );
+
+  const relativeRepository = AppDataSource.getRepository(Relative);
+
+  await Promise.all(
+    relativeExamples.map(async ({ name, phone, email }) => {
+      const newRelative = new Relative(name, email, phone);
+
+      await relativeRepository.save(newRelative);
+    })
+  );
+
+  // await Promise.all(
+  //   relativeExamples.map(async ({ name, phone, email }) => {
+  //     const newClassroom = new Relative(name, email, phone);
+  //     await classroomRepository.save(newClassroom);
+  //   })
+  // );
 };

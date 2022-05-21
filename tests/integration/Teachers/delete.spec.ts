@@ -32,13 +32,15 @@ describe("Testing teachers deletion", () => {
     });
 
     if (teacher) {
+      const oldEntityLength = await teacherRepository.count();
+
       const response = await request(app).delete(`/teachers/${teacher.id}`);
 
       expect(response.statusCode).toBe(204);
 
       const entityLength = await teacherRepository.count();
 
-      expect(entityLength).toBe(3);
+      expect(entityLength).toBe(oldEntityLength - 1);
     }
   });
 

@@ -1,12 +1,6 @@
-import { Teacher } from "../../../src/entities/Teacher";
+import { Classroom } from "../../../src/entities";
 
-// temporary
-type Classroom = {
-  name: string;
-  teacherId?: Teacher;
-};
-
-export const classroomExamples: Classroom[] = [
+export const classroomExamples: Partial<Classroom>[] = [
   {
     name: "Artes",
     teacherId: undefined,
