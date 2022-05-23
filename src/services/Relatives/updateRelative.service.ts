@@ -10,37 +10,28 @@ export const updateRelativeService = async ({
 }: Partial<Relative>) => {
   const relativeRepository = AppDataSource.getRepository(Relative);
 
-  try {
-    const relative = await relativeRepository.findOneBy({ id });
+  const relative = await relativeRepository.findOneBy({ id });
 
-    if (!relative) {
-      throw new AppError(404, "Relative not found");
-    }
+  if (!relative) {
+    throw new AppError(404, "Relative not found");
+  }
 
-    if (email) {
-      const verifyEmail = await relativeRepository.findOneBy({ email });
+  if (email) {
+    const verifyEmail = await relativeRepository.findOneBy({ email });
 
-      if (verifyEmail) {
-        throw new AppError(409, "This email is already in use");
-      }
-    }
-
-    const updatedRelative = {
-      id: relative.id,
-      name: name || relative.name,
-      email: email || relative.email,
-      phone: phone || relative.phone,
-    };
-
-    await relativeRepository.update(relative.id, updatedRelative);
-
-    return updatedRelative;
-  } catch (err) {
-    if (err instanceof AppError) {
-      throw new AppError(err.statusCode, err.message);
-    }
-    if (err instanceof Error) {
-      throw new AppError(400, err.message);
+    if (verifyEmail) {
+      throw new AppError(409, "This email is already in use");
     }
   }
+
+  const updatedRelative = {
+    id: relative.id,
+    name: name || relative.name,
+    email: email || relative.email,
+    phone: phone || relative.phone,
+  };
+
+  await relativeRepository.update(relative.id, updatedRelative);
+
+  return updatedRelative;
 };

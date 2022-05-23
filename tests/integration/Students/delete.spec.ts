@@ -3,8 +3,8 @@ import request from "supertest";
 import { DataSource } from "typeorm";
 import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
-import { Classroom } from "../../../src/entities";
-import { classroomExamples } from "../../fixtures/classroom";
+import { Student } from "../../../src/entities";
+import { studentExamples } from "../../fixtures/students";
 import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
 
 let connection: DataSource;
@@ -21,41 +21,39 @@ afterAll(async () => {
   await dbDestroy(connection);
 });
 
-describe("Testing classroom deletion", () => {
-  it("should be able to delete one classroom", async () => {
-    const classroomExample = classroomExamples[0];
+describe("Testing students deletion", () => {
+  it("should be able to delete one student", async () => {
+    const studentExample = studentExamples[0];
 
-    const classroomRepository = AppDataSource.getRepository(Classroom);
+    const studentRepository = AppDataSource.getRepository(Student);
 
-    const classroom = await classroomRepository.findOneBy({
-      name: classroomExample.name,
+    const student = await studentRepository.findOneBy({
+      name: studentExample.name,
     });
 
-    if (classroom) {
-      const oldEntityLength = await classroomRepository.count();
+    const oldEntityLength = await studentRepository.count();
 
-      const response = await request(app).delete(`/classroom/${classroom.id}`);
+    const response = await request(app).delete(`/students/${student?.id}`);
 
-      expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(204);
 
-      const entityLength = await classroomRepository.count();
+    const entityLength = await studentRepository.count();
 
-      expect(entityLength).toBe(oldEntityLength - 1);
-    }
+    expect(entityLength).toBe(oldEntityLength - 1);
   });
 
   it("should not be able to delete a false id", async () => {
     const response = await request(app).delete(
-      "/classroom/2b133b1b-97dd-4e3d-a8d8-e86da085f43f"
+      "/students/2b133b1b-97dd-4e3d-a8d8-e86da085f43f"
     );
 
     expect(response.statusCode).toBe(404);
-    expect(response.body.message).toBe("Classroom not found or doesn't exists");
+    expect(response.body.message).toBe("Student not found or doesn't exists");
     expect(response.body.status).toBe("error");
   });
 
   it("should not be able to delete a invalid id (not uuid)", async () => {
-    const response = await request(app).delete("/classroom/5");
+    const response = await request(app).delete("/students/5");
 
     expect(response.statusCode).toBe(400);
     expect(response.body.message).toBe("Invalid id");

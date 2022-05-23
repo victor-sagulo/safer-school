@@ -36,30 +36,29 @@ describe("Testing teachers update", () => {
       email: teacherExample.email,
     });
 
-    if (teacher) {
-      const response = await request(app)
-        .patch(`/teachers/${teacher.id}`)
-        .send({ email: valuesToUpdate.email, name: valuesToUpdate.name });
+    const response = await request(app)
+      .patch(`/teachers/${teacher?.id}`)
+      .send({ email: valuesToUpdate.email, name: valuesToUpdate.name });
 
-      const teacherUpdated = response.body;
+    const teacherUpdated = response.body;
 
-      expect(teacherUpdated.email).toBe(valuesToUpdate.email);
+    expect(teacherUpdated.email).toBe(valuesToUpdate.email);
 
-      expect(teacherUpdated.name).toBe(valuesToUpdate.name);
+    expect(teacherUpdated.name).toBe(valuesToUpdate.name);
 
-      const pastEmailFromDb = await teacherRepository.findOneBy({
-        email: teacherExample.email,
-      });
+    const pastEmailFromDb = await teacherRepository.findOneBy({
+      email: teacherExample.email,
+    });
 
-      expect(pastEmailFromDb).toBeFalsy();
+    expect(pastEmailFromDb).toBeFalsy();
 
-      const newEmailFromDb = await teacherRepository.findOneBy({
-        email: valuesToUpdate.email,
-      });
+    const newEmailFromDb = await teacherRepository.findOneBy({
+      email: valuesToUpdate.email,
+    });
 
-      expect(newEmailFromDb?.id).toBeDefined();
-    }
+    expect(newEmailFromDb?.id).toBeDefined();
   });
+
   it("should not be able to update teacher id", async () => {
     const teacherExample = teacherExamples[2] as Teacher;
 
@@ -67,32 +66,28 @@ describe("Testing teachers update", () => {
       email: teacherExample.email,
     });
 
-    if (teacher) {
-      const newId = "2b133b1b-97dd-4e3d-a8d8-e86da085f43f";
+    const newId = "2b133b1b-97dd-4e3d-a8d8-e86da085f43f";
 
-      const response = await request(app)
-        .patch(`/teachers/${teacher.id}`)
-        .send({ id: newId });
+    const response = await request(app)
+      .patch(`/teachers/${teacher?.id}`)
+      .send({ id: newId });
 
-      const teacherUpdated = response.body;
+    const teacherUpdated = response.body;
 
-      expect(response.statusCode).toBe(400);
-      expect(teacherUpdated.status).toBe("error");
-      expect(teacherUpdated.message).toBe(
-        "You must provide data to be updated"
-      );
+    expect(response.statusCode).toBe(400);
+    expect(teacherUpdated.status).toBe("error");
+    expect(teacherUpdated.message).toBe("You must provide data to be updated");
 
-      const countTeacherNewId = await teacherRepository.countBy({
-        id: newId,
-      });
+    const countTeacherNewId = await teacherRepository.countBy({
+      id: newId,
+    });
 
-      expect(countTeacherNewId).toBe(0);
+    expect(countTeacherNewId).toBe(0);
 
-      const countTeacherOldId = await teacherRepository.countBy({
-        id: teacher.id,
-      });
+    const countTeacherOldId = await teacherRepository.countBy({
+      id: teacher?.id,
+    });
 
-      expect(countTeacherOldId).toBe(1);
-    }
+    expect(countTeacherOldId).toBe(1);
   });
 });

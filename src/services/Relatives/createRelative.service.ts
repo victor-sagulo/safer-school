@@ -10,24 +10,15 @@ export const createRelativeService = async ({
 }: RelativeCreation) => {
   const relativeRepository = AppDataSource.getRepository(Relative);
 
-  try {
-    const relativeAlreadyExists = await relativeRepository.findOneBy({ email });
+  const relativeAlreadyExists = await relativeRepository.findOneBy({ email });
 
-    if (relativeAlreadyExists) {
-      throw new AppError(409, "This email is already being used");
-    }
-
-    const relative = new Relative(name, email, phone);
-
-    await relativeRepository.save(relative);
-
-    return relative;
-  } catch (err) {
-    if (err instanceof AppError) {
-      throw new AppError(err.statusCode, err.message);
-    }
-    if (err instanceof Error) {
-      throw new AppError(400, err.message);
-    }
+  if (relativeAlreadyExists) {
+    throw new AppError(409, "This email already exists");
   }
+
+  const relative = new Relative(name, email, phone);
+
+  await relativeRepository.save(relative);
+
+  return relative;
 };
