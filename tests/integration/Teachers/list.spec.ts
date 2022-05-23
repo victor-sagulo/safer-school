@@ -47,8 +47,9 @@ describe("Testing teachers list", () => {
         `/teachers/${teacherToVerify.id}`
       );
       const teacher = response.body;
+
       expect(response.statusCode).toBe(200);
-      expect(teacher).toMatchObject({ ...teacher });
+      expect(teacher).toMatchObject({ ...teacherToVerify });
     }
   });
 });

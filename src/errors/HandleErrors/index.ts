@@ -4,12 +4,12 @@ import { Request, Response, NextFunction } from "express";
 import { AppError } from "../AppError";
 
 export const handleErrors = (
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   err: any,
   req: Request,
   res: Response,
   _: NextFunction
 ) => {
-  console.log(err);
   if (err instanceof AppError) {
     return res.status(err.statusCode).json({
       status: "error",

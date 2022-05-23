@@ -39,7 +39,7 @@ export class Student {
 
   constructor(
     name: string,
-    birthDate: string,
+    birthDate: Date,
     address: string,
     classroom?: Classroom
   ) {
