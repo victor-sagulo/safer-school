@@ -13,76 +13,34 @@ Get /students - FORMATO DA RESPOSTA - status 200
 ```json
 [
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Rafael Ricciardi",
-		"birth_date": "1997-07-01T11:35:18.768Z",
-		"address": "Lorem ipsum dolor emet",
-		"classroom_id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"entered_at": "2020-11-30T18:40:08.316Z",
-		"left_at": "2020-11-30T18:40:08.316Z",
-		"created_at": "2020-11-30T18:40:08.316Z",
-		"relatives": [
-			{
-				"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-				"name": "Rafael Ricciardi",
-				"email": "rafael@gmail.com",
-				"phone": "9999999999999"
-			},
-			{
-				"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-				"name": "Rafael Ricciardi",
-				"email": "rafael@gmail.com",
-				"phone": "9999999999999"
-			}
-		]
+		"name": "Luke Fuerth Sagulo",
+		"birthDate": "2027-07-07T03:00:00.000Z",
+		"address": "Av. Edson Passos, 1054",
+		"classroomId": null,
+		"id": "7c0fc495-5797-4f55-81e5-7211a99eef6b",
+		"enteredAt": null,
+		"leftAt": null,
+		"createdAt": "2022-05-23T13:54:33.994Z"
 	},
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Victor Sagulo",
-		"birth_date": "1997-07-01T11:35:18.768Z",
-		"address": "Lorem ipsum dolor emet",
-		"classroom_id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"entered_at": "2020-11-30T18:40:08.316Z",
-		"left_at": "2020-11-30T18:40:08.316Z",
-		"created_at": "2020-11-30T18:40:08.316Z",
-		"relatives": [
-			{
-				"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-				"name": "Rafael Ricciardi",
-				"email": "rafael@gmail.com",
-				"phone": "9999999999999"
-			},
-			{
-				"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-				"name": "Rafael Ricciardi",
-				"email": "rafael@gmail.com",
-				"phone": "9999999999999"
-			}
-		]
+		"name": "Rafael",
+		"birthDate": "2027-07-07T03:00:00.000Z",
+		"address": "Av. Edson Passos, 1054",
+		"classroomId": null,
+		"id": "9c196d1b-b52f-45c1-8e43-42fb2e2374f2",
+		"enteredAt": null,
+		"leftAt": null,
+		"createdAt": "2022-05-23T14:03:00.014Z"
 	},
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Marcos Mafei",
-		"birth_date": "1997-07-01T11:35:18.768Z",
-		"address": "Lorem ipsum dolor emet",
-		"classroom_id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"entered_at": "2020-11-30T18:40:08.316Z",
-		"left_at": "2020-11-30T18:40:08.316Z",
-		"created_at": "2020-11-30T18:40:08.316Z",
-		"relatives": [
-			{
-				"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-				"name": "Rafael Ricciardi",
-				"email": "rafael@gmail.com",
-				"phone": "9999999999999"
-			},
-			{
-				"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-				"name": "Rafael Ricciardi",
-				"email": "rafael@gmail.com",
-				"phone": "9999999999999"
-			}
-		]
+		"name": "Gabriel",
+		"birthDate": "2027-07-07T03:00:00.000Z",
+		"address": "Av. Edson Passos, 1054",
+		"classroomId": null,
+		"id": "7eecaa3f-a12b-437a-bba9-d054f713801e",
+		"enteredAt": null,
+		"leftAt": null,
+		"createdAt": "2022-05-23T14:03:05.611Z"
 	}
 ]
 ```
@@ -95,28 +53,14 @@ Get /students/:id - FORMATO DA RESPOSTA - status 200
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "Rafael Ricciardi",
-	"birth_date": "1997-07-01T11:35:18.768Z",
-	"address": "Lorem ipsum dolor emet",
-	"classroom_id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"entered_at": "2020-11-30T18:40:08.316Z",
-	"left_at": "2020-11-30T18:40:08.316Z",
-	"created_at": "2020-11-30T18:40:08.316Z",
-	"relatives": [
-		{
-			"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-			"name": "Rafael Ricciardi",
-			"email": "rafael@gmail.com",
-			"phone": "9999999999999"
-		},
-		{
-			"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-			"name": "Rafael Ricciardi",
-			"email": "rafael@gmail.com",
-			"phone": "9999999999999"
-		}
-	]
+	"name": "Luke Fuerth Sagulo",
+	"birthDate": "2027-07-07T03:00:00.000Z",
+	"address": "Av. Edson Passos, 1054",
+	"classroomId": null,
+	"id": "7c0fc495-5797-4f55-81e5-7211a99eef6b",
+	"enteredAt": null,
+	"leftAt": null,
+	"createdAt": "2022-05-23T13:54:33.994Z"
 }
 ```
 
@@ -128,16 +72,27 @@ Get students/relatives/:id - FORMATO DA RESPOSTA - status 200
 
 ```json
 {
-    "id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-    "name": "Rafael Ricciardi",
-    "email": "rafael@gmail.com",
-    "phone": "9999999999999"
-},
-{
-    "id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-    "name": "Rafael Ricciardi",
-    "email": "rafael@gmail.com",
-    "phone": "9999999999999"
+	"student": {
+		"name": "Luke Fuerth Sagulo",
+		"birthDate": "2027-07-07T03:00:00.000Z",
+		"address": "Av. Edson Passos, 1054",
+		"classroomId": null,
+		"id": "7c0fc495-5797-4f55-81e5-7211a99eef6b",
+		"enteredAt": null,
+		"leftAt": null,
+		"createdAt": "2022-05-23T13:54:33.994Z"
+	},
+	"relatives": [
+		{
+			"relative": {
+				"name": "Yohanna Fuerth",
+				"email": "yohanna@gmail.com",
+				"phone": "21995848401",
+				"id": "b1a49044-4a46-4123-8fbb-f0389e1d4066"
+			},
+			"parentLevel": "Father"
+		}
+	]
 }
 ```
 
@@ -150,19 +105,14 @@ Get /teachers - FORMATO DA RESPOSTA - status 200
 ```json
 [
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Rafael Ricciardi",
-		"email": "rafael@gmail.com"
+		"name": "Matheus Rocha",
+		"email": "rocha@ball.com.br",
+		"id": "56a93234-fd46-4e25-be25-560b417d7775"
 	},
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Rafael Ricciardi",
-		"email": "rafael@gmail.com"
-	},
-	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Rafael Ricciardi",
-		"email": "rafael@gmail.com"
+		"name": "Victor Sagulo",
+		"email": "victor@ball.com.br",
+		"id": "3d99c361-41e7-41cc-aaa6-6b7e43f7a5c9"
 	}
 ]
 ```
@@ -175,9 +125,9 @@ Get /teachers/:id - FORMATO DA RESPOSTA - status 200
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "Rafael Ricciardi",
-	"email": "rafael@gmail.com"
+	"name": "Victor Sagulo",
+	"email": "victor@ball.com.br",
+	"id": "3d99c361-41e7-41cc-aaa6-6b7e43f7a5c9"
 }
 ```
 
@@ -190,19 +140,14 @@ Get /classroom - FORMATO DA RESPOSTA - status 200
 ```json
 [
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "5º ano C",
-		"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+		"name": "1ª série A",
+		"teacherId": null,
+		"id": "0d13007e-29ed-4af0-a5a0-e2cd7a32aad2"
 	},
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "5º ano C",
-		"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
-	},
-	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "5º ano C",
-		"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+		"name": "2ª série B",
+		"teacherId": null,
+		"id": "cd16c72a-89a5-4cf7-839f-2f6f14773ad2"
 	}
 ]
 ```
@@ -215,10 +160,35 @@ Get /classroom/:id - FORMATO DA RESPOSTA - status 200
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "5º ano C",
-	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+	"name": "1ª série A",
+	"teacherId": null,
+	"id": "0d13007e-29ed-4af0-a5a0-e2cd7a32aad2"
 }
+```
+
+Lista todos os alunos matriculados em uma turma específica a partir do id utilizando o endpoint:
+
+```
+Get /classroom/students/:id - FORMATO DA RESPOSTA - status 200
+```
+
+```json
+[
+	{
+		"name": "Luke Fuerth Sagulo",
+		"birthDate": "2027-07-07T03:00:00.000Z",
+		"address": "Av. Edson Passos, 1054",
+		"classroomId": {
+			"name": "1ª série A",
+			"teacherId": null,
+			"id": "0d13007e-29ed-4af0-a5a0-e2cd7a32aad2"
+		},
+		"id": "7c0fc495-5797-4f55-81e5-7211a99eef6b",
+		"enteredAt": null,
+		"leftAt": null,
+		"createdAt": "2022-05-23T13:54:33.994Z"
+	}
+]
 ```
 
 Lista todos os responsáveis cadastrados utilizando o endpoint:
@@ -230,22 +200,16 @@ Get /relatives - FORMATO DA RESPOSTA - status 200
 ```json
 [
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Rafael Ricciardi",
-		"email": "rafael@gmail.com",
-		"phone": "9999999999999"
+		"name": "Yohanna Fuerth",
+		"email": "yohanna@gmail.com",
+		"phone": "21995848401",
+		"id": "b1a49044-4a46-4123-8fbb-f0389e1d4066"
 	},
 	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
 		"name": "Rafael Ricciardi",
 		"email": "rafael@gmail.com",
-		"phone": "9999999999999"
-	},
-	{
-		"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-		"name": "Rafael Ricciardi",
-		"email": "rafael@gmail.com",
-		"phone": "9999999999999"
+		"phone": "21995848401",
+		"id": "769f7526-aa54-4eb4-ab7b-274f9ffba45a"
 	}
 ]
 ```
@@ -258,10 +222,10 @@ Get /relatives/:id - FORMATO DA RESPOSTA - status 200
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
 	"name": "Rafael Ricciardi",
 	"email": "rafael@gmail.com",
-	"phone": "9999999999999"
+	"phone": "21995848401",
+	"id": "769f7526-aa54-4eb4-ab7b-274f9ffba45a"
 }
 ```
 
