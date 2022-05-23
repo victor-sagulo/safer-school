@@ -3,7 +3,7 @@ import request from "supertest";
 import { DataSource } from "typeorm";
 import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
-import { Student } from "../../../src/entities";
+import { Relative, Student, StudentsRelatives } from "../../../src/entities";
 import { studentExamples } from "../../fixtures/students";
 import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
 
@@ -22,6 +22,10 @@ afterAll(async () => {
 });
 
 describe("Testing students list", () => {
+  const studentRepository = AppDataSource.getRepository(Student);
+  const studentRelativesRepository =
+    AppDataSource.getRepository(StudentsRelatives);
+
   it("should be able to list all students", async () => {
     const response = await request(app).get("/students");
     const studentList = response.body;
@@ -42,8 +46,6 @@ describe("Testing students list", () => {
   it("should be able to list only one student by id", async () => {
     const studentExample = studentExamples[0];
 
-    const studentRepository = AppDataSource.getRepository(Student);
-
     const studentToVerify = await studentRepository.findOneBy({
       name: studentExample.name,
     });
@@ -61,5 +63,37 @@ describe("Testing students list", () => {
 
     expect(response.statusCode).toBe(200);
     expect(student).toMatchObject({ ...studentToVerify });
+  });
+
+  it("should be able to list all relatives of one student by id", async () => {
+    const studentExample = studentExamples[2];
+
+    const studentToVerify = await studentRepository.findOneBy({
+      name: studentExample.name,
+    });
+
+    const studentRelativeExample = await studentRelativesRepository
+      .createQueryBuilder("relation")
+      .innerJoinAndSelect("relation.studentId", "student")
+      .innerJoinAndSelect("relation.relativeId", "relative")
+      .where("relation.student_id = :studentId", {
+        studentId: studentToVerify?.id,
+      })
+      .getMany();
+
+    const response = await request(app).get(
+      `/students/relatives/${studentToVerify?.id}`
+    );
+    const relativeList: { parentLevel: string; relative: Relative[] }[] =
+      response.body.relatives;
+
+    expect(response.statusCode).toBe(200);
+    expect(relativeList).toHaveLength(1);
+
+    relativeList.forEach(({ relative }, index) => {
+      expect(relative).toMatchObject({
+        ...studentRelativeExample[index]?.relativeId,
+      });
+    });
   });
 });

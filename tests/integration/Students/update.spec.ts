@@ -91,4 +91,42 @@ describe("Testing students update", () => {
 
     expect(countStudentOldId).toBe(1);
   });
+
+  it("should be able to update enteredAt of a student", async () => {
+    const studentExample = studentExamples[3];
+
+    const beforeStudent = await studentRepository.findOneBy({
+      name: studentExample.name,
+    });
+
+    const response = await request(app).patch(
+      `/students/entry/${beforeStudent?.id}`
+    );
+
+    const student = response.body;
+
+    expect(response.statusCode).toBe(200);
+
+    expect(student).toHaveProperty("message");
+    expect(typeof student.message).toBe("string");
+  });
+
+  it("should be able to update leftAt of a student", async () => {
+    const studentExample = studentExamples[3];
+
+    const beforeStudent = await studentRepository.findOneBy({
+      name: studentExample.name,
+    });
+
+    const response = await request(app).patch(
+      `/students/leave/${beforeStudent?.id}`
+    );
+
+    const student = response.body;
+
+    expect(response.statusCode).toBe(200);
+
+    expect(student).toHaveProperty("message");
+    expect(typeof student.message).toBe("string");
+  });
 });
