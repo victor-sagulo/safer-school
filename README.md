@@ -275,9 +275,9 @@ Post /students - FORMATO DA REQUISIÇÃO
 
 ```json
 {
-	"name": "Rafael Ricciardi",
-	"birth_date": "1997-07-01T11:35:18.768Z",
-	"address": "Lorem ipsum dolor emet"
+	"name": "Gabriel",
+	"birth_date": "07/07/2027",
+	"address": "Av. Edson Passos, 1054"
 }
 ```
 
@@ -289,14 +289,56 @@ Post /students - FORMATO DA RESPOSTA - status 201
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "Rafael Ricciardi",
-	"birth_date": "1997-07-01T11:35:18.768Z",
-	"address": "Lorem ipsum dolor emet",
-	"classroom_id": null,
-	"entered_at": null,
-	"left_at": null,
-	"created_at": "2020-11-30T18:40:08.316Z"
+	"name": "Gabriel",
+	"birthDate": "2027-07-07T03:00:00.000Z",
+	"address": "Av. Edson Passos, 1054",
+	"enteredAt": null,
+	"leftAt": null,
+	"id": "7eecaa3f-a12b-437a-bba9-d054f713801e",
+	"createdAt": "2022-05-23T14:03:05.611Z"
+}
+```
+
+Cadastra um novo responsável para o estudante:
+
+```
+Post /students/relatives - FORMATO DA REQUISIÇÃO
+```
+
+```json
+{
+	"studentId": "1170c56e-c8c5-4278-a11c-779c467d54df",
+	"relativeId": "b0cf7ce1-fedc-4f9d-8d25-448522a6bf4c",
+	"parentLevel": "Father"
+}
+```
+
+Caso tudo dê certo, a resposta será assim:
+
+```
+Post /students/relatives - FORMATO DA RESPOSTA - status 201
+```
+
+```json
+{
+	"studentId": {
+		"name": "Luke Fuerth Sagulo",
+		"birthDate": "2027-07-07T03:00:00.000Z",
+		"address": "Av. Edson Passos, 1054",
+		"classroomId": null,
+		"id": "7c0fc495-5797-4f55-81e5-7211a99eef6b",
+		"enteredAt": null,
+		"leftAt": null,
+		"createdAt": "2022-05-23T13:54:33.994Z"
+	},
+	"relativeId": {
+		"name": "Yohanna Fuerth",
+		"email": "yohanna@gmail.com",
+		"phone": "21995848401",
+		"id": "b1a49044-4a46-4123-8fbb-f0389e1d4066"
+	},
+	"parentLevel": "Father",
+	"id": "0d6195a2-48a2-44c6-844d-e28d6e3a6094"
 }
 ```
 
@@ -308,9 +350,9 @@ Post /relatives - FORMATO DA REQUISAÇÂO
 
 ```json
 {
-	"name": "Rafael Ricciardi",
-	"email": "rafael@gmail.com",
-	"phone": "9999999999999"
+	"name": "Yohanna Fuerth",
+	"email": "yohanna@gmail.com",
+	"phone": "21995848401"
 }
 ```
 
@@ -322,10 +364,10 @@ Post /relatives - FORMATO DA RESPOSTA - status 201
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "Rafael Ricciardi",
-	"email": "rafael@gmail.com",
-	"phone": "9999999999999"
+	"name": "Yohanna Fuerth",
+	"email": "yohanna@gmail.com",
+	"phone": "21995848401",
+	"id": "b1a49044-4a46-4123-8fbb-f0389e1d4066"
 }
 ```
 
@@ -337,8 +379,7 @@ Post /classroom - FORMATO DA REQUISAÇÂO
 
 ```json
 {
-	"name": "5º ano C",
-	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+	"name": "1ª série A"
 }
 ```
 
@@ -350,9 +391,8 @@ Post /classroom - FORMATO DA RESPOSTA - status 201
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "5º ano C",
-	"teacher_id": "863a5291-d6c8-4869-8461-db0dcf4f176b"
+	"name": "1ª série A",
+	"id": "0d13007e-29ed-4af0-a5a0-e2cd7a32aad2"
 }
 ```
 
@@ -364,8 +404,8 @@ Post /teachers - FORMATO DA REQUISAÇÂO
 
 ```json
 {
-	"name": "Rafael Ricciardi",
-	"email": "rafael@gmail.com"
+	"name": "Matheus Rocha",
+	"email": "rocha@ball.com.br"
 }
 ```
 
@@ -377,9 +417,9 @@ Post /teachers - FORMATO DA RESPOSTA - status 201
 
 ```json
 {
-	"id": "863a5291-d6c8-4869-8461-db0dcf4f176b",
-	"name": "Rafael Ricciardi",
-	"email": "rafael@gmail.com"
+	"name": "Matheus Rocha",
+	"email": "rocha@ball.com.br",
+	"id": "56a93234-fd46-4e25-be25-560b417d7775"
 }
 ```
 
