@@ -7,13 +7,19 @@ import {
   updateRelativeService,
   deleteRelativeService,
   listAllStudentsByRelativeService,
+  loginService,
 } from "../../services";
 
 export class RelativesController {
   static async store(req: Request, res: Response) {
-    const { name, email, phone } = req.body;
+    const { name, email, phone, password } = req.body;
 
-    const createRelative = await createRelativeService({ name, email, phone });
+    const createRelative = await createRelativeService({
+      name,
+      email,
+      phone,
+      password,
+    });
 
     return res.status(201).json(createRelative);
   }
@@ -34,9 +40,9 @@ export class RelativesController {
 
   static async update(req: Request, res: Response) {
     const { id } = req.params;
-    const { name, email, phone } = req.body;
+    const { name, email, phone, password } = req.body;
 
-    if (!name && !email && !phone) {
+    if (!name && !email && !phone && !password) {
       throw new AppError(400, "You must provide data to be updated");
     }
 
@@ -45,6 +51,7 @@ export class RelativesController {
       name,
       email,
       phone,
+      password,
     });
 
     return res.status(200).json(updatedRelative);
@@ -66,5 +73,13 @@ export class RelativesController {
     const students = await listAllStudentsByRelativeService(id);
 
     return res.status(200).json(students);
+  }
+
+  static async login(req: Request, res: Response) {
+    const { email, password } = req.body;
+
+    const token = await loginService({ email, password });
+
+    return res.status(200).json(token);
   }
 }
