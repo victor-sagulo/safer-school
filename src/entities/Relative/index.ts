@@ -11,6 +11,9 @@ export class Relative {
   @Column({ nullable: false, length: 128, unique: true })
   email: string;
 
+  @Column({ nullable: false, length: 128 })
+  password: string;
+
   @Column({ nullable: false, length: 13 })
   phone: string;
 
