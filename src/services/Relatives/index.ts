@@ -5,3 +5,4 @@ export * from "./updateRelative.service";
 export * from "./deleteRelative.service";
 export * from "./listOneRelative.service";
 export * from "./listStudents.service";
+export * from "./login.service";

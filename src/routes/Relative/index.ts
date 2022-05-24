@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { RelativesController } from "../../controllers";
 import { validateData, validateIdParams } from "../../middlewares";
-import { storeRelative, updateRelative } from "../../schemas";
+import { login, storeRelative, updateRelative } from "../../schemas";
 
 const relativeRoutes = Router();
 
@@ -24,5 +24,6 @@ relativeRoutes.get(
   validateIdParams,
   RelativesController.listStudents
 );
+relativeRoutes.post("/login", validateData(login), RelativesController.login);
 
 export default relativeRoutes;

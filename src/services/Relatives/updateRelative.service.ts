@@ -1,12 +1,14 @@
 import { AppDataSource } from "../../data-source";
 import { Relative } from "../../entities";
 import { AppError } from "../../errors";
+import bcrypt from "bcrypt";
 
 export const updateRelativeService = async ({
   id,
   name,
   email,
   phone,
+  password,
 }: Partial<Relative>) => {
   const relativeRepository = AppDataSource.getRepository(Relative);
 
@@ -29,6 +31,7 @@ export const updateRelativeService = async ({
     name: name || relative.name,
     email: email || relative.email,
     phone: phone || relative.phone,
+    password: password ? bcrypt.hashSync(password, 10) : relative.password,
   };
 
   await relativeRepository.update(relative.id, updatedRelative);
