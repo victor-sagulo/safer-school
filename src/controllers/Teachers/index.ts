@@ -54,6 +54,8 @@ export class TeacherController {
     const { id } = req.params;
     await deleteTeacherService(id);
 
-    return res.sendStatus(204);
+    return res.status(200).json({
+      message: "Teacher deleted sucessfully",
+    });
   }
 }
