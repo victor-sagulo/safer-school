@@ -8,9 +8,9 @@ export const createStudentService = async ({
   address,
 }: StudentCreation) => {
   const studentRepository = AppDataSource.getRepository(Student);
-
+  console.log("chegou aqui 2", birthDate);
   const student = new Student(name, birthDate, address);
-
+  console.log("chegou aqui3", student.birthDate);
   await studentRepository.save(student);
 
   return student;

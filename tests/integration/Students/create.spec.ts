@@ -10,7 +10,7 @@ let connection: DataSource;
 
 const studentExample = {
   name: "Mario Maria",
-  birth_date: new Date(20006, 7, 10),
+  birthDate: new Date(20006, 7, 10),
   address: "Logo ali, 0",
 };
 
@@ -42,7 +42,9 @@ describe("Testing students creation", () => {
     expect(response.statusCode).toBe(201);
     expect(typeof studentCreated.id).toBe("string");
     expect(studentCreated.name).toBe(studentExample.name);
-    expect(studentCreated.birthDate).toBe(studentExample.birth_date.toISOString());
+    expect(studentCreated.birthDate).toBe(
+      studentExample.birthDate.toISOString()
+    );
     expect(studentCreated.address).toBe(studentExample.address);
 
     const teacherFromDb = await studentRepository.findOneBy({
@@ -51,7 +53,9 @@ describe("Testing students creation", () => {
 
     expect(teacherFromDb?.id).toBe(studentCreated.id);
     expect(teacherFromDb?.name).toBe(studentCreated.name);
-    expect(teacherFromDb?.birthDate.toISOString()).toBe(studentCreated.birthDate);
+    expect(teacherFromDb?.birthDate.toISOString()).toBe(
+      studentCreated.birthDate
+    );
     expect(teacherFromDb?.address).toBe(studentCreated.address);
 
     const countTeachers = await studentRepository.countBy({
@@ -68,7 +72,9 @@ describe("Testing students creation", () => {
 
     expect(response.statusCode).toBe(400);
     expect(response.body.id).toBeUndefined();
-    expect(response.body.message).toBe("You need to provide a birth date to register a student");
+    expect(response.body.message).toBe(
+      "You need to provide a birth date to register a student"
+    );
     expect(response.body.status).toBe("error");
 
     const countTeachers = await studentRepository.countBy({
