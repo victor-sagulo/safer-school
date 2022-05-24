@@ -22,7 +22,11 @@ export const loginService = async ({ email, password }: RelativeLogin) => {
   }
 
   const token = jwt.sign(
-    { email: found.email, id: found.id },
+    {
+      email: found.email,
+      id: found.id,
+      isAdm: found.email == "school@adm.com",
+    },
     process.env.TOKEN_KEY as string,
     { expiresIn: "24h" }
   );
