@@ -1,6 +1,11 @@
 import { Router } from "express";
 import { RelativesController } from "../../controllers";
-import { validateData, validateIdParams } from "../../middlewares";
+import {
+  validateAdmMiddleware,
+  validateData,
+  validateIdParams,
+  validateTokenMiddleware,
+} from "../../middlewares";
 import { login, storeRelative, updateRelative } from "../../schemas";
 
 const relativeRoutes = Router();
@@ -10,17 +15,29 @@ relativeRoutes.post(
   validateData(storeRelative),
   RelativesController.store
 );
-relativeRoutes.get("/", RelativesController.index);
-relativeRoutes.get("/:id", validateIdParams, RelativesController.show);
+relativeRoutes.get("/", validateAdmMiddleware, RelativesController.index);
+relativeRoutes.get(
+  "/:id",
+  validateTokenMiddleware,
+  validateIdParams,
+  RelativesController.show
+);
 relativeRoutes.patch(
   "/:id",
+  validateTokenMiddleware,
   validateIdParams,
   validateData(updateRelative),
   RelativesController.update
 );
-relativeRoutes.delete("/:id", validateIdParams, RelativesController.delete);
+relativeRoutes.delete(
+  "/:id",
+  validateTokenMiddleware,
+  validateIdParams,
+  RelativesController.delete
+);
 relativeRoutes.get(
   "/students/:id",
+  validateTokenMiddleware,
   validateIdParams,
   RelativesController.listStudents
 );
