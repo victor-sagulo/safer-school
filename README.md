@@ -700,7 +700,7 @@ Delete /students/:id - FORMATO DA RESPOSTA - status 209
 
 ```json
 {
-	"message": "Student successfully deleted"
+	"message": "Student deleted successfully"
 }
 ```
 
@@ -720,7 +720,7 @@ Delete /relatives/:id - FORMATO DA RESPOSTA - status 209
 
 ```json
 {
-	"message": "Relative successfully deleted"
+	"message": "Relative deleted successfully"
 }
 ```
 
@@ -740,7 +740,7 @@ Delete /teachers/:id - FORMATO DA RESPOSTA - status 209
 
 ```json
 {
-	"message": "Teacher successfully deleted"
+	"message": "Teacher deleted successfully"
 }
 ```
 
@@ -760,7 +760,7 @@ Delete /classroom/:id - FORMATO DA RESPOSTA - status 209
 
 ```json
 {
-	"message": "Classroom successfully deleted"
+	"message": "Classrrom deleted successfully"
 }
 ```
 
@@ -813,5 +813,3 @@ Patch /classroom/:id - FORMATO DA RESPOSTA - status 404
 	"message": "Classroom not found or doesn't exists"
 }
 ```
-
-cawawdad
