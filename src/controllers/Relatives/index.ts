@@ -62,7 +62,9 @@ export class RelativesController {
 
     await deleteRelativeService(id);
 
-    return res.status(204).json();
+    return res.status(200).json({
+      message: "Relative deleted sucessfully",
+    });
   }
 
   static async listStudents(req: Request, res: Response) {
