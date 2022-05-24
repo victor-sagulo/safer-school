@@ -43,7 +43,9 @@ export class StudentController {
   static async delete(req: Request, res: Response) {
     const { id } = req.params;
     await deleteStudentService(id);
-    return res.status(204).json();
+    return res.status(200).json({
+      message: "Student deleted sucessfully",
+    });
   }
   static async updateEntry(req: Request, res: Response) {
     const { id } = req.params;

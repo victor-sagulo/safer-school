@@ -55,7 +55,9 @@ export class ClassroomController {
     const { id } = req.params;
     await deleteClassroomService(id);
 
-    return res.sendStatus(204);
+    return res.status(200).json({
+      message: "Classroom deleted successfully",
+    });
   }
 
   static async listStudents(req: Request, res: Response) {
