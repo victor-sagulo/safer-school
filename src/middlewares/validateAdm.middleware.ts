@@ -6,7 +6,7 @@ import "dotenv/config";
 interface Data {
   email: string;
   id: string;
-  isAdm: Boolean;
+  isAdm: boolean;
 }
 
 export const validateAdmMiddleware = (
