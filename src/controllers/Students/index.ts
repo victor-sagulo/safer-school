@@ -16,7 +16,6 @@ import {
 export class StudentController {
   static async store(req: Request, res: Response) {
     const { name, birthDate, address } = req.body;
-
     const student = await createStudentService({ name, birthDate, address });
 
     return res.status(201).json(student);

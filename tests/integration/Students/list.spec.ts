@@ -40,7 +40,6 @@ describe("Testing students list", () => {
     expect(studentList[0]).toHaveProperty("enteredAt");
     expect(studentList[0]).toHaveProperty("leftAt");
     expect(studentList[0]).toHaveProperty("createdAt");
-    expect(studentList[0]).toHaveProperty("relatives");
   });
 
   it("should be able to list only one student by id", async () => {
@@ -87,6 +86,15 @@ describe("Testing students list", () => {
     const relativeList: { parentLevel: string; relative: Relative[] }[] =
       response.body.relatives;
 
+    const student = response.body.student;
+
+    expect(student).toHaveProperty("id");
+    expect(student).toHaveProperty("name");
+    expect(student).toHaveProperty("address");
+    expect(student).toHaveProperty("birthDate");
+    expect(student).toHaveProperty("enteredAt");
+    expect(student).toHaveProperty("leftAt");
+    expect(student).toHaveProperty("createdAt");
     expect(response.statusCode).toBe(200);
     expect(relativeList).toHaveLength(1);
 
