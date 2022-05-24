@@ -7,7 +7,7 @@ export const storeStudent = yup.object().shape({
     .max(128, "max name length is 128 characters"),
   birthDate: yup
     .string()
-    .required("You need to provide a birth date to register a student"),
+    .required("You need to provide a birthDate to register a student"),
   address: yup
     .string()
     .required("You need to provide a address to register a student")
