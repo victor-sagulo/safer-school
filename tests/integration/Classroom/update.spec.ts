@@ -6,14 +6,22 @@ import { AppDataSource } from "../../../src/data-source";
 import { Classroom } from "../../../src/entities";
 import { Teacher } from "../../../src/entities/Teacher";
 import { classroomExamples } from "../../fixtures/classroom";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -44,7 +52,8 @@ describe("Testing classroom update", () => {
     if (classroom) {
       const response = await request(app)
         .patch(`/classroom/${classroom.id}`)
-        .send({ name: valuesToUpdate.name, teacherId: teacherExample?.id });
+        .send({ name: valuesToUpdate.name, teacherId: teacherExample?.id })
+        .set("Authorization", token);
 
       const classroomUpdated = response.body;
 
@@ -83,7 +92,8 @@ describe("Testing classroom update", () => {
 
       const response = await request(app)
         .patch(`/classroom/${classroom.id}`)
-        .send({ id: newId });
+        .send({ id: newId })
+        .set("Authorization", token);
 
       const classroomUpdated = response.body;
 

@@ -1,12 +1,18 @@
 import { expect, describe, it, beforeAll, afterAll } from "@jest/globals";
 import { DataSource } from "typeorm";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 import request from "supertest";
 import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Teacher } from "../../../src/entities/Teacher";
 
 let connection: DataSource;
+let token: string;
 
 const teacherExample = {
   name: "Maria Paula Silva",
@@ -23,6 +29,8 @@ beforeAll(async () => {
 
   if (db) connection = db;
 
+  token = await loginAdm();
+
   await populateDb();
 });
 
@@ -34,7 +42,10 @@ describe("Testing teachers creation", () => {
   const teacherRepository = AppDataSource.getRepository(Teacher);
 
   it("should be able to create a new teacher", async () => {
-    const response = await request(app).post("/teachers").send(teacherExample);
+    const response = await request(app)
+      .post("/teachers")
+      .send(teacherExample)
+      .set("Authorization", token);
 
     const teacherCreated = response.body;
 
@@ -57,7 +68,8 @@ describe("Testing teachers creation", () => {
   it("should not be able to create two teachers with same email", async () => {
     const response = await request(app)
       .post("/teachers")
-      .send(teacherSameEmail);
+      .send(teacherSameEmail)
+      .set("Authorization", token);
 
     expect(response.statusCode).toBe(409);
     expect(response.body.id).toBeUndefined();

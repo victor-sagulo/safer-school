@@ -1,17 +1,24 @@
 import { DataSource } from "typeorm";
 import { beforeAll, afterAll, describe, it, expect } from "@jest/globals";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 import { AppDataSource } from "../../../src/data-source";
 import { Classroom, Teacher } from "../../../src/entities";
 import request from "supertest";
 import { app } from "../../../src/app";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -34,10 +41,13 @@ describe("Testing classroom creation", () => {
     };
 
     if (teacherExample) {
-      const response = await request(app).post("/classroom").send({
-        name: classroomExample.name,
-        teacherId: teacherExample.id,
-      });
+      const response = await request(app)
+        .post("/classroom")
+        .set("Authorization", token)
+        .send({
+          name: classroomExample.name,
+          teacherId: teacherExample.id,
+        });
 
       const classroom = response.body;
 
@@ -62,10 +72,13 @@ describe("Testing classroom creation", () => {
   it("should not be able to create two classroom with same name", async () => {
     const [classroomExample] = await classroomRepository.find();
 
-    const response = await request(app).post("/classroom").send({
-      name: classroomExample.name,
-      teacherId: classroomExample.teacherId?.id,
-    });
+    const response = await request(app)
+      .post("/classroom")
+      .set("Authorization", token)
+      .send({
+        name: classroomExample.name,
+        teacherId: classroomExample.teacherId?.id,
+      });
 
     expect(response.statusCode).toBe(409);
     expect(response.body.status).toBe("error");

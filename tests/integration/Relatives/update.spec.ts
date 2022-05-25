@@ -5,14 +5,22 @@ import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Relative } from "../../../src/entities";
 import { relativeExamples } from "../../fixtures/relatives";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -44,7 +52,8 @@ describe("Testing relatives update", () => {
           email: valuesToUpdate.email,
           name: valuesToUpdate.name,
           phone: valuesToUpdate.phone,
-        });
+        })
+        .set("Authorization", token);
 
       const relativeUpdated = response.body;
 
@@ -69,7 +78,8 @@ describe("Testing relatives update", () => {
   it("should not be able to update a not found relative", async () => {
     const response = await request(app)
       .patch("/relatives/2b133b1b-97dd-4e3d-a8d8-e86da085f43f")
-      .send({ name: relativeExamples[3].name });
+      .send({ name: relativeExamples[3].name })
+      .set("Authorization", token);
 
     expect(response.statusCode).toBe(404);
     expect(response.body.status).toBe("error");
@@ -87,7 +97,8 @@ describe("Testing relatives update", () => {
 
     const response = await request(app)
       .patch(`/relatives/${relative?.id}`)
-      .send({ id: newId });
+      .send({ id: newId })
+      .set("Authorization", token);
 
     const teacherUpdated = response.body;
 
