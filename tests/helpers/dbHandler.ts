@@ -8,6 +8,8 @@ import { relativeExamples } from "../fixtures/relatives";
 import { studentExamples } from "../fixtures/students";
 import { studentsRelativesExamples } from "../fixtures/studentsRelatives";
 import { teacherExamples } from "../fixtures/teachers";
+import request from "supertest";
+import { app } from "../../src/app";
 
 export const dbConnect = async () => {
   try {
@@ -16,6 +18,19 @@ export const dbConnect = async () => {
   } catch (error) {
     console.error("Database error", error);
   }
+};
+
+export const loginAdm = async () => {
+  await request(app).post("/relatives").send({
+    email: "school@adm.com",
+    password: "strongPassword",
+    name: "Adm",
+    phone: "121212",
+  });
+  const token = await request(app)
+    .post("/relatives/login")
+    .send({ email: "school@adm.com", password: "strongPassword" });
+  return token.body.AccessToken;
 };
 
 export const dbDestroy = async (connection: DataSource) => {
@@ -59,6 +74,8 @@ export const populateDb = async () => {
   await Promise.all(
     relativeExamples.map(async ({ name, phone, email }, index) => {
       const newRelative = new Relative(name, email, phone);
+
+      newRelative.password = "strongPassword";
 
       studentsRelativesExamples[index].relativeId = newRelative;
 

@@ -4,9 +4,15 @@ import { DataSource } from "typeorm";
 import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Student } from "../../../src/entities";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 const studentExample = {
   name: "Mario Maria",
@@ -24,6 +30,8 @@ beforeAll(async () => {
 
   if (db) connection = db;
 
+  token = await loginAdm();
+
   await populateDb();
 });
 
@@ -35,7 +43,10 @@ describe("Testing students creation", () => {
   const studentRepository = AppDataSource.getRepository(Student);
 
   it("should be able to create a new student", async () => {
-    const response = await request(app).post("/students").send(studentExample);
+    const response = await request(app)
+      .post("/students")
+      .send(studentExample)
+      .set("Authorization", token);
 
     const studentCreated = response.body;
 
@@ -68,12 +79,13 @@ describe("Testing students creation", () => {
   it("should not be able to create a student without a birthDate", async () => {
     const response = await request(app)
       .post("/students")
-      .send(studentWithoutBirthDate);
+      .send(studentWithoutBirthDate)
+      .set("Authorization", token);
 
     expect(response.statusCode).toBe(400);
     expect(response.body.id).toBeUndefined();
     expect(response.body.message).toBe(
-      "You need to provide a birth date to register a student"
+      "You need to provide a birthDate to register a student"
     );
     expect(response.body.status).toBe("error");
 

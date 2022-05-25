@@ -12,12 +12,14 @@ const relativeExample = {
   name: "Maria Paula Silva",
   email: "tia_paulinha@yahoo.com.br",
   phone: "456789658",
+  password: "password",
 };
 
 const relativeSameEmail = {
   name: "Joana Paula Silva",
   email: "tia_paulinha@yahoo.com.br",
   phone: "784512369",
+  password: "password",
 };
 
 beforeAll(async () => {

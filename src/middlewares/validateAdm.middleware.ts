@@ -16,8 +16,6 @@ export const validateAdmMiddleware = (
 ) => {
   const token = req.headers.authorization;
 
-  console.log(token);
-
   if (!token) {
     throw new AppError(401, "Unauthorized");
   }

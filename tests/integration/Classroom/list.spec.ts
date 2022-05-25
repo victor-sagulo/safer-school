@@ -4,14 +4,22 @@ import { DataSource } from "typeorm";
 import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Classroom } from "../../../src/entities";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -22,7 +30,9 @@ afterAll(async () => {
 
 describe("Testing classroom list", () => {
   it("Should be able to list all classrooms ", async () => {
-    const response = await request(app).get("/classroom");
+    const response = await request(app)
+      .get("/classroom")
+      .set("Authorization", token);
 
     const classroomList: Classroom[] = response.body;
 
@@ -41,9 +51,9 @@ describe("Testing classroom list", () => {
     const [classroomExample] = await classroomRepository.find();
 
     if (classroomExample) {
-      const response = await request(app).get(
-        `/classroom/${classroomExample.id}`
-      );
+      const response = await request(app)
+        .get(`/classroom/${classroomExample.id}`)
+        .set("Authorization", token);
 
       const classroom = response.body;
 

@@ -5,14 +5,22 @@ import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Student } from "../../../src/entities";
 import { studentExamples } from "../../fixtures/students";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -38,7 +46,8 @@ describe("Testing students update", () => {
 
     const response = await request(app)
       .patch(`/students/${student?.id}`)
-      .send({ address: valuesToUpdate.address, name: valuesToUpdate.name });
+      .send({ address: valuesToUpdate.address, name: valuesToUpdate.name })
+      .set("Authorization", token);
 
     const studentUpdated = response.body;
 
@@ -71,7 +80,8 @@ describe("Testing students update", () => {
 
     const response = await request(app)
       .patch(`/students/${student?.id}`)
-      .send({ id: newId });
+      .send({ id: newId })
+      .set("Authorization", token);
 
     const studentUpdated = response.body;
 
@@ -99,9 +109,9 @@ describe("Testing students update", () => {
       name: studentExample.name,
     });
 
-    const response = await request(app).patch(
-      `/students/entry/${beforeStudent?.id}`
-    );
+    const response = await request(app)
+      .patch(`/students/entry/${beforeStudent?.id}`)
+      .set("Authorization", token);
 
     const student = response.body;
 
@@ -118,9 +128,9 @@ describe("Testing students update", () => {
       name: studentExample.name,
     });
 
-    const response = await request(app).patch(
-      `/students/leave/${beforeStudent?.id}`
-    );
+    const response = await request(app)
+      .patch(`/students/leave/${beforeStudent?.id}`)
+      .set("Authorization", token);
 
     const student = response.body;
 

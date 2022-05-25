@@ -5,14 +5,22 @@ import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Relative, Student, StudentsRelatives } from "../../../src/entities";
 import { studentExamples } from "../../fixtures/students";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -27,7 +35,9 @@ describe("Testing students list", () => {
     AppDataSource.getRepository(StudentsRelatives);
 
   it("should be able to list all students", async () => {
-    const response = await request(app).get("/students");
+    const response = await request(app)
+      .get("/students")
+      .set("Authorization", token);
     const studentList = response.body;
 
     expect(response.statusCode).toBe(200);
@@ -56,7 +66,9 @@ describe("Testing students list", () => {
         studentToVerify?.birthDate.toISOString() as unknown as Date;
     }
 
-    const response = await request(app).get(`/students/${studentToVerify?.id}`);
+    const response = await request(app)
+      .get(`/students/${studentToVerify?.id}`)
+      .set("Authorization", token);
 
     const student = response.body;
 
@@ -80,9 +92,9 @@ describe("Testing students list", () => {
       })
       .getMany();
 
-    const response = await request(app).get(
-      `/students/relatives/${studentToVerify?.id}`
-    );
+    const response = await request(app)
+      .get(`/students/relatives/${studentToVerify?.id}`)
+      .set("Authorization", token);
     const relativeList: { parentLevel: string; relative: Relative[] }[] =
       response.body.relatives;
 

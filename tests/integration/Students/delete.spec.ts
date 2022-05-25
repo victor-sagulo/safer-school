@@ -5,14 +5,22 @@ import { app } from "../../../src/app";
 import { AppDataSource } from "../../../src/data-source";
 import { Student } from "../../../src/entities";
 import { studentExamples } from "../../fixtures/students";
-import { dbConnect, dbDestroy, populateDb } from "../../helpers/dbHandler";
+import {
+  dbConnect,
+  dbDestroy,
+  loginAdm,
+  populateDb,
+} from "../../helpers/dbHandler";
 
 let connection: DataSource;
+let token: string;
 
 beforeAll(async () => {
   const db = await dbConnect();
 
   if (db) connection = db;
+
+  token = await loginAdm();
 
   await populateDb();
 });
@@ -33,9 +41,11 @@ describe("Testing students deletion", () => {
 
     const oldEntityLength = await studentRepository.count();
 
-    const response = await request(app).delete(`/students/${student?.id}`);
+    const response = await request(app)
+      .delete(`/students/${student?.id}`)
+      .set("Authorization", token);
 
-    expect(response.statusCode).toBe(204);
+    expect(response.statusCode).toBe(200);
 
     const entityLength = await studentRepository.count();
 
@@ -43,9 +53,9 @@ describe("Testing students deletion", () => {
   });
 
   it("should not be able to delete a false id", async () => {
-    const response = await request(app).delete(
-      "/students/2b133b1b-97dd-4e3d-a8d8-e86da085f43f"
-    );
+    const response = await request(app)
+      .delete("/students/2b133b1b-97dd-4e3d-a8d8-e86da085f43f")
+      .set("Authorization", token);
 
     expect(response.statusCode).toBe(404);
     expect(response.body.message).toBe("Student not found or doesn't exists");
@@ -53,7 +63,9 @@ describe("Testing students deletion", () => {
   });
 
   it("should not be able to delete a invalid id (not uuid)", async () => {
-    const response = await request(app).delete("/students/5");
+    const response = await request(app)
+      .delete("/students/5")
+      .set("Authorization", token);
 
     expect(response.statusCode).toBe(400);
     expect(response.body.message).toBe("Invalid id");
