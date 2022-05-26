@@ -1,4 +1,4 @@
-<h1 align="center" style="text-transform:uppercase"><a href="" style="color:#fff;text-decoration:none">Safer School</a></h1>
+<h1 align="center" style="text-transform:uppercase"><a href="https://victor-sagulo.github.io/safer-school/" style="color:#fff;text-decoration:none">Safer School</a></h1>
 
 <h1 align="center"><img src="./logo.png" style="width:200px"/></h1>
 
