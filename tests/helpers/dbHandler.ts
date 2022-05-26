@@ -1,9 +1,15 @@
 import { DataSource } from "typeorm";
 import { AppDataSource } from "../../src/data-source";
+import { Relative, Student, StudentsRelatives } from "../../src/entities";
 import { Classroom } from "../../src/entities/Classroom";
 import { Teacher } from "../../src/entities/Teacher";
 import { classroomExamples } from "../fixtures/classroom";
+import { relativeExamples } from "../fixtures/relatives";
+import { studentExamples } from "../fixtures/students";
+import { studentsRelativesExamples } from "../fixtures/studentsRelatives";
 import { teacherExamples } from "../fixtures/teachers";
+import request from "supertest";
+import { app } from "../../src/app";
 
 export const dbConnect = async () => {
   try {
@@ -12,6 +18,19 @@ export const dbConnect = async () => {
   } catch (error) {
     console.error("Database error", error);
   }
+};
+
+export const loginAdm = async () => {
+  await request(app).post("/relatives").send({
+    email: "school@adm.com",
+    password: "strongPassword",
+    name: "Adm",
+    phone: "121212",
+  });
+  const token = await request(app)
+    .post("/relatives/login")
+    .send({ email: "school@adm.com", password: "strongPassword" });
+  return token.body.AccessToken;
 };
 
 export const dbDestroy = async (connection: DataSource) => {
@@ -37,11 +56,61 @@ export const populateDb = async () => {
   const classroomRepository = AppDataSource.getRepository(Classroom);
 
   await Promise.all(
-    classroomExamples.map(async ({ name, teacherId }) => {
-      if (teacherId) {
-        const newClassroom = new Classroom(name, teacherId);
-        await classroomRepository.save(newClassroom);
+    (classroomExamples as Classroom[]).map(
+      async ({ name, teacherId }, index) => {
+        if (teacherId) {
+          const newClassroom = new Classroom(name, teacherId);
+
+          studentExamples[index].classroomId = newClassroom;
+
+          await classroomRepository.save(newClassroom);
+        }
       }
+    )
+  );
+
+  const relativeRepository = AppDataSource.getRepository(Relative);
+
+  await Promise.all(
+    relativeExamples.map(async ({ name, phone, email }, index) => {
+      const newRelative = new Relative(name, email, phone);
+
+      newRelative.password = "strongPassword";
+
+      studentsRelativesExamples[index].relativeId = newRelative;
+
+      await relativeRepository.save(newRelative);
     })
+  );
+
+  const studentRepository = AppDataSource.getRepository(Student);
+
+  await Promise.all(
+    studentExamples.map(
+      async ({ name, address, birthDate, classroomId }, index) => {
+        const newStudent = new Student(name, birthDate, address, classroomId);
+
+        studentsRelativesExamples[index].studentId = newStudent;
+
+        await studentRepository.save(newStudent);
+      }
+    )
+  );
+
+  const studentRelativeRepository =
+    AppDataSource.getRepository(StudentsRelatives);
+
+  await Promise.all(
+    studentsRelativesExamples.map(
+      async ({ studentId, relativeId, parentLevel }) => {
+        const newRelation = new StudentsRelatives(
+          studentId,
+          relativeId,
+          parentLevel
+        );
+
+        await studentRelativeRepository.save(newRelation);
+      }
+    )
   );
 };
